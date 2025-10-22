@@ -14,7 +14,7 @@ public class NPCSystem : MonoBehaviour
     {
         if(/*playerDetection && */Input.GetKeyDown(KeyCode.F)) {
             print("Dialogue started!");
-            textPrinter.PrintText("Hello, traveler! Welcome to our village.");
+            textPrinter.PrintText("Hiya! Did you see the lake lately? It's been getting mighty dirty. What a shame.");
         }
     }
 

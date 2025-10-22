@@ -33,7 +33,7 @@ public class TextPrinter : MonoBehaviour
         for(int i = 0; i < textToType.Length; i++)
         {
             subtitleTextMesh.text += textToType[i];
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.025f);
         }
     }
 
