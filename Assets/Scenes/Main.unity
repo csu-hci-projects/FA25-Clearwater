@@ -2062,6 +2062,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d8e8c9310144ce58843ee67724803c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextPrinter
+  normalTextSpeed: 0
+  skipTextSpeed: 0
 --- !u!1 &1080972014
 GameObject:
   m_ObjectHideFlags: 0
