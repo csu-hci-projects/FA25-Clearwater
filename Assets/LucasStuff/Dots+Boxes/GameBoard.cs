@@ -10,10 +10,10 @@ struct Edge
 
 public class GameBoard
 {
-    private int rows;
-    private int cols;
-    private bool[,,] edges;
-    private Player[,] boxes;
+    private readonly int rows;
+    private readonly int cols;
+    private readonly bool[,,] edges;
+    private readonly Player[,] boxes;
 
     public GameBoard(int rows, int cols)
     {
