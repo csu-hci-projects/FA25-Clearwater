@@ -1,4 +1,3 @@
-enum EdgeType { Horizontal, Vertical }
 enum Player { None, Human, AI }
 
 struct Edge
@@ -56,7 +55,7 @@ public class GameBoard
 
         if (e.Type == EdgeType.Horizontal)
         {
-            if (e.Y < row) list.Add((e.Y, e.X));
+            if (e.Y < rows) list.Add((e.Y, e.X));
             if (e.Y > 0) list.Add((e.Y - 1, e.X));
         }
         else
