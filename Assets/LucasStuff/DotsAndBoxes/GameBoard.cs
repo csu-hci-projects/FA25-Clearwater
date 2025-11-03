@@ -12,10 +12,10 @@ public class GameBoard
         this.rows = rows;
         this.cols = cols;
         edges = new bool[rows + 1, cols + 1, 2];
-        boxes = new int[rows, cols];
+        boxes = new Player[rows, cols];
 
-        for (int row = 0; row < rows; ++row)
-            for (int col = 0; col < cols; ++col)
+        for (int row = 0; row < rows; row++)
+            for (int col = 0; col < cols; col++)
                 boxes[row, col] = Player.None;
     }
 
@@ -62,7 +62,7 @@ public class GameBoard
 
     public IEnumerable<Edge> GetAvailableMoves()
     {
-        for (int y = 0; y <= rows; ++y)
+        for (int y = 0; y <= rows; y++)
             for (int x = 0; x < cols; x++)
                 if (!edges[y, x, EdgeType.Horizontal])
                     yield return new Edge { Type = EdgeType.Horizontal, X = x, Y = y };
