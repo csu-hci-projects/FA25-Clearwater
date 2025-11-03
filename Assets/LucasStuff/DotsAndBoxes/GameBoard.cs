@@ -1,12 +1,5 @@
 enum Player { None, Human, AI }
 
-struct Edge
-{
-    public EdgeType Type;
-    public int X;
-    public int Y;
-}
-
 public class GameBoard
 {
     private readonly int rows;
