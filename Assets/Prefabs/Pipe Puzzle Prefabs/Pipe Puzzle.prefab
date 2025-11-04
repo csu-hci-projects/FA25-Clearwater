@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9478efaab0735a64183b4416c6088c57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PipePuzzleBrain
-  pipeD: {fileID: 8499168207855509552, guid: aebe97a50d26604469e04837ce683146, type: 3}
-  pipeL: {fileID: 4061465425890846270, guid: 301421a04bcec4c4195a570ace45382c, type: 3}
-  pipeI: {fileID: 5540825312033158278, guid: 867a6f0c700c23e47bc9c647a11c6883, type: 3}
-  pipeT: {fileID: 4246778955875134052, guid: c679554954c3e0247a448c2baedefa60, type: 3}
+  pipeD: {fileID: 5715689302249012533, guid: bcaa4835ea06ed449a01777b6aacac7e, type: 3}
+  pipeL: {fileID: 2667604217695004995, guid: 63cfd8a2f01dd3d45893998c4471bad8, type: 3}
+  pipeI: {fileID: 6378943026598678466, guid: cf33f5b6b0a1ca34cbc7a3a6fdbfb8d5, type: 3}
+  pipeT: {fileID: 7112284664316517130, guid: 83c23ba2da701d04187f60151fd58048, type: 3}
   insepctorPipesGrid:
     gridSize: {x: 4, y: 4}
     cellSize: {x: 64, y: 16}
