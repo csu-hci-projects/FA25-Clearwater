@@ -26,7 +26,7 @@ public class HeuristicAI
 
         foreach (var (row, col) in board.GetAffectedBoxes(move))
         {
-            score += random.Next(-5, 6);
+            score += random.Next(-3, 4);
             switch (CountBoxEdges(board, box.row, box.col, move))
             {
                 case 1:
