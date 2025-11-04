@@ -1,22 +1,20 @@
-enum Player { None, Human, AI }
-
 public class GameBoard
 {
     private readonly int rows;
     private readonly int cols;
     private readonly bool[,,] edges;
-    private readonly Player[,] boxes;
+    private readonly PlayerEnum[,] boxes;
 
     public GameBoard(int rows, int cols)
     {
         this.rows = rows;
         this.cols = cols;
         edges = new bool[rows + 1, cols + 1, 2];
-        boxes = new Player[rows, cols];
+        boxes = new PlayerEnum[rows, cols];
 
         for (int row = 0; row < rows; row++)
             for (int col = 0; col < cols; col++)
-                boxes[row, col] = Player.None;
+                boxes[row, col] = PlayerEnum.None;
     }
 
     public bool IsEdgeAvailable(Edge e)
@@ -24,7 +22,7 @@ public class GameBoard
         return !edges[e.Y, e.X, e.Type];
     }
 
-    public void ApplyMove(Edge e, Player player)
+    public void ApplyMove(Edge e, PlayerEnum player)
     {
         edges[e.Y, e.X, e.Type] = true;
 
