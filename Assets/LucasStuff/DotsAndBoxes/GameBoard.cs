@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class GameBoard
 {
     private readonly int rows;
@@ -17,32 +19,27 @@ public class GameBoard
                 boxes[row, col] = PlayerEnum.None;
     }
 
-    public bool IsEdgeAvailable(Edge e)
-    {
-        return !edges[e.Y, e.X, e.Type];
-    }
-
     public void ApplyMove(Edge e, PlayerEnum player)
     {
-        edges[e.Y, e.X, e.Type] = true;
+        edges[e.Y, e.X, (int)e.Type] = true;
 
-        foreach (var (row, col) in GetAffectedBoxes(e))
-            if (IsBoxCompleted(row, col))
-                boxes[row, col] = player;
+        foreach (var box in GetAffectedBoxes(e))
+            if (IsBoxCompleted(box.row, box.col))
+                boxes[box.row, box.col] = player;
     }
 
     private bool IsBoxCompleted(int row, int col)
     {
-        bool top = edges[row, col, EdgeType.Horizontal];
-        bool bottom = edges[row + 1, col, EdgeType.Horizontal];
-        bool left = edges[row, col, EdgeType.Vertical];
-        bool right = edges[row, col + 1, EdgeType.Vertical];
+        bool top = edges[row, col, (int)EdgeType.Horizontal];
+        bool bottom = edges[row + 1, col, (int)EdgeType.Horizontal];
+        bool left = edges[row, col, (int)EdgeType.Vertical];
+        bool right = edges[row, col + 1, (int)EdgeType.Vertical];
         return top && bottom && left && right;
     }
 
-    private static List<(int row, int col)> GetAffectedBoxes(Edge e)
+    public List<(int row, int col)> GetAffectedBoxes(Edge e)
     {
-        List<(int, int)> list = [];
+        List<(int, int)> list = new();
 
         if (e.Type == EdgeType.Horizontal)
         {
@@ -62,12 +59,28 @@ public class GameBoard
     {
         for (int y = 0; y <= rows; y++)
             for (int x = 0; x < cols; x++)
-                if (!edges[y, x, EdgeType.Horizontal])
+                if (!edges[y, x, (int)EdgeType.Horizontal])
                     yield return new Edge { Type = EdgeType.Horizontal, X = x, Y = y };
 
         for (int y = 0; y < rows; y++)
             for (int x = 0; x <= cols; x++)
-                if (!edges[y, x, EdgeType.Vertical])
+                if (!edges[y, x, (int)EdgeType.Vertical])
                     yield return new Edge { Type = EdgeType.Vertical, X = x, Y = y };
+    }
+
+    public bool HasEdge(int y, int x, EdgeType type, Edge? hypotheticalMove = null)
+    {
+        if (hypotheticalMove.HasValue && hypotheticalMove.Value.Y == y && hypotheticalMove.Value.X == x && hypotheticalMove.Value.Type == type) return true;
+
+        if (type == EdgeType.Horizontal)
+        {
+            if (y < 0 || y > rows || x < 0 || x >= cols) return false;
+        }
+        else
+        {
+            if (y < 0 || y >= rows || x < 0 || x > cols) return false;
+        }
+
+        return edges[y, x, (int)type];
     }
 }

@@ -1,3 +1,5 @@
+using System;
+
 public class HeuristicAI
 {
     private readonly Random random = new();
@@ -27,7 +29,7 @@ public class HeuristicAI
         foreach (var (row, col) in board.GetAffectedBoxes(move))
         {
             score += random.Next(-3, 4);
-            switch (CountBoxEdges(board, box.row, box.col, move))
+            switch (CountBoxEdges(board, row, col, move))
             {
                 case 1:
                     score += 3; break;
@@ -45,10 +47,10 @@ public class HeuristicAI
     {
         int count = 0;
 
-        if (board.HasEdge(row, col, EdgeType.Horizontal, true, hypotheticalMove)) count++;
-        if (board.HasEdge(row + 1, col, EdgeType.Horizontal, false, hypotheticalMove)) count++;
-        if (board.HasEdge(row, col, EdgeType.Vertical, true, hypotheticalMove)) count++;
-        if (board.HasEdge(row, col + 1, EdgeType.Vertical, false, hypotheticalMove)) count++;
+        if (board.HasEdge(row, col, EdgeType.Horizontal, hypotheticalMove)) count++;
+        if (board.HasEdge(row + 1, col, EdgeType.Horizontal, hypotheticalMove)) count++;
+        if (board.HasEdge(row, col, EdgeType.Vertical, hypotheticalMove)) count++;
+        if (board.HasEdge(row, col + 1, EdgeType.Vertical, hypotheticalMove)) count++;
 
         return count;
     }
