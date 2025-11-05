@@ -3,7 +3,37 @@ guid: 7a7de65d483307741816ac7fad25ba62
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body
+    second: {fileID: 2100000, guid: ce4df55c7ab28c84c9a63d48e0d662b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cle
+    second: {fileID: 2100000, guid: be160813f27af10468284d744be1e8dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hair
+    second: {fileID: 2100000, guid: a9fa93e6f0cfb2d4cb4f07ef5c20a752, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: head
+    second: {fileID: 2100000, guid: a34ddca78d9411b43a08cadbde4586a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pentalon
+    second: {fileID: 2100000, guid: 547dd97b9d04d2943844808ed5c139fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shoose
+    second: {fileID: 2100000, guid: 1a336b826bee47140b1e82fc91577557, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
