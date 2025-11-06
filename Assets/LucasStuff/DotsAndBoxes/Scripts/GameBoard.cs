@@ -23,9 +23,9 @@ public class GameBoard
     {
         edges[e.Y, e.X, (int)e.Type] = true;
 
-        foreach (var box in GetAffectedBoxes(e))
-            if (IsBoxCompleted(box.row, box.col))
-                boxes[box.row, box.col] = player;
+        foreach (var (row, col) in GetAffectedBoxes(e))
+            if (IsBoxCompleted(row, col))
+                boxes[row, col] = player;
     }
 
     private bool IsBoxCompleted(int row, int col)
