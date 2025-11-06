@@ -1,4 +1,4 @@
-public enum PlayerEnum
+public enum Player
 {
     None,
     Human,

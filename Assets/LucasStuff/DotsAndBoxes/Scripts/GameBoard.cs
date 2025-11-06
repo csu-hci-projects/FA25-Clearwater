@@ -5,21 +5,21 @@ public class GameBoard
     private readonly int rows;
     private readonly int cols;
     private readonly bool[,,] edges;
-    private readonly PlayerEnum[,] boxes;
+    private readonly Player[,] boxes;
 
     public GameBoard(int rows, int cols)
     {
         this.rows = rows;
         this.cols = cols;
         edges = new bool[rows + 1, cols + 1, 2];
-        boxes = new PlayerEnum[rows, cols];
+        boxes = new Player[rows, cols];
 
         for (int row = 0; row < rows; row++)
             for (int col = 0; col < cols; col++)
-                boxes[row, col] = PlayerEnum.None;
+                boxes[row, col] = Player.None;
     }
 
-    public void ApplyMove(Edge e, PlayerEnum player)
+    public void ApplyMove(Edge e, Player player)
     {
         edges[e.Y, e.X, (int)e.Type] = true;
 
