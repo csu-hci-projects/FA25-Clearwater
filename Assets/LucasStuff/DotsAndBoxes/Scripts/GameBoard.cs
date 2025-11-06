@@ -1,86 +1,84 @@
+using System;
 using System.Collections.Generic;
 
 public class GameBoard
 {
-    private readonly int rows;
-    private readonly int cols;
-    private readonly bool[,,] edges;
-    private readonly Player[,] boxes;
+    private readonly int Rows = 6;
+    private readonly int Columns = 6;
+    private readonly Player[,] HorizontalEdges;
+    private readonly Player[,] VerticalEdges;
+    private readonly Player[,] Boxes;
 
-    public GameBoard(int rows, int cols)
+    public GameBoard()
     {
-        this.rows = rows;
-        this.cols = cols;
-        edges = new bool[rows + 1, cols + 1, 2];
-        boxes = new Player[rows, cols];
-
-        for (int row = 0; row < rows; row++)
-            for (int col = 0; col < cols; col++)
-                boxes[row, col] = Player.None;
+        HorizontalEdges = new Player[Rows, Columns - 1];
+        VerticalEdges = new Player[Rows - 1, Columns];
+        Boxes = new Player[Rows - 1, Columns - 1];
     }
 
-    public void ApplyMove(Edge e, Player player)
+    /// <summary>
+    /// Returns true if a box was completed
+    /// </summary>
+    public bool DrawLine(bool isHorizontal, int row, int col, Player player)
     {
-        edges[e.Y, e.X, (int)e.Type] = true;
-
-        foreach (var (row, col) in GetAffectedBoxes(e))
-            if (IsBoxCompleted(row, col))
-                boxes[row, col] = player;
-    }
-
-    private bool IsBoxCompleted(int row, int col)
-    {
-        bool top = edges[row, col, (int)EdgeType.Horizontal];
-        bool bottom = edges[row + 1, col, (int)EdgeType.Horizontal];
-        bool left = edges[row, col, (int)EdgeType.Vertical];
-        bool right = edges[row, col + 1, (int)EdgeType.Vertical];
-        return top && bottom && left && right;
-    }
-
-    public List<(int row, int col)> GetAffectedBoxes(Edge e)
-    {
-        List<(int, int)> list = new();
-
-        if (e.Type == EdgeType.Horizontal)
+        if (isHorizontal)
         {
-            if (e.Y < rows) list.Add((e.Y, e.X));
-            if (e.Y > 0) list.Add((e.Y - 1, e.X));
+            if (HorizontalEdges[row, col] != Player.None)
+                throw new InvalidOperationException($"Horizontal line at ({row},{col}) already set");
+
+            HorizontalEdges[row, col] = player;
         }
         else
         {
-            if (e.X < cols) list.Add((e.Y, e.X));
-            if (e.X > 0) list.Add((e.Y, e.X - 1));
+            if (VerticalEdges[row, col] != Player.None)
+                throw new InvalidOperationException($"Vertical line at ({row},{col}) already set");
+
+            VerticalEdges[row, col] = player;
         }
 
-        return list;
+        return CheckBoxes(isHorizontal, row, col, player);
     }
 
-    public IEnumerable<Edge> GetAvailableMoves()
+    private bool CheckBoxes(bool isHorizontal, int row, int col, Player player)
     {
-        for (int y = 0; y <= rows; y++)
-            for (int x = 0; x < cols; x++)
-                if (!edges[y, x, (int)EdgeType.Horizontal])
-                    yield return new Edge { Type = EdgeType.Horizontal, X = x, Y = y };
+        bool completed = false;
 
-        for (int y = 0; y < rows; y++)
-            for (int x = 0; x <= cols; x++)
-                if (!edges[y, x, (int)EdgeType.Vertical])
-                    yield return new Edge { Type = EdgeType.Vertical, X = x, Y = y };
-    }
-
-    public bool HasEdge(int y, int x, EdgeType type, Edge? hypotheticalMove = null)
-    {
-        if (hypotheticalMove.HasValue && hypotheticalMove.Value.Y == y && hypotheticalMove.Value.X == x && hypotheticalMove.Value.Type == type) return true;
-
-        if (type == EdgeType.Horizontal)
+        List<(int, int)> boxesToCheck = new();
+        if (isHorizontal)
         {
-            if (y < 0 || y > rows || x < 0 || x >= cols) return false;
+            if (row > 0)
+                boxesToCheck.Add((row - 1, col));
+            if (row < Rows - 1)
+                boxesToCheck.Add((row, col));
         }
         else
         {
-            if (y < 0 || y >= rows || x < 0 || x > cols) return false;
+            if (col > 0)
+                boxesToCheck.Add((row, col - 1));
+            if (col < Columns)
+                boxesToCheck.Add((row, col));
         }
 
-        return edges[y, x, (int)type];
+        foreach (var (r, c) in boxesToCheck)
+        {
+            if (r >= 0 && r < Rows - 1 && c >= 0 && c < Columns - 1)
+            {
+                if (Boxes[r, c] == Player.None && IsBoxComplete(r, c))
+                {
+                    Boxes[r, c] = player;
+                    completed = true;
+                }
+            }
+        }
+
+        return completed;
+    }
+
+    private bool IsBoxComplete(int row, int col)
+    {
+        return HorizontalEdges[row, col] != Player.None 
+            && HorizontalEdges[row + 1, col] != Player.None
+            && VerticalEdges[row, col] != Player.None
+            && VerticalEdges[row, col + 1] != Player.None;
     }
 }
