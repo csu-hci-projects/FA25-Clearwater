@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GameBoard
 {
@@ -105,6 +106,11 @@ public class GameBoard
         }
 
         return has;
+    }
+
+    public bool IsGameOver()
+    {
+        return GetAvailableMoves().Count() == 0;
     }
 
     private bool CheckBoxes(bool isHorizontal, int row, int col, Player player)

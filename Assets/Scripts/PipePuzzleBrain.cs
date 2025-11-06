@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System.Runtime.CompilerServices;
 
-public class PipePuzzleBrain : MonoBehaviour, IsToggleable
+public class PipePuzzleBrain : MonoBehaviour, IsToggleable, PuzzleBrain
 {
     private bool finished = false;
     enum Rotation { UP, RIGHT, DOWN, LEFT }
@@ -76,7 +76,7 @@ public class PipePuzzleBrain : MonoBehaviour, IsToggleable
         pipesGrid[row, column].transform.Rotate(0, 90f, 0);
     }
 
-    bool CheckCompletion()
+    public bool CheckCompletion()
     {
         List<Rotation>[,] connections = InitializeConnections(insepctorPipesGrid.GridSize.y, insepctorPipesGrid.GridSize.x);
         for (int i = 0; i < connections.GetLength(0); i++)
