@@ -26,6 +26,11 @@ namespace DotsAndBoxes
             Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0.0f);
         }
 
+        public void Init(Controller controller)
+        {
+            master = controller;
+        }
+
         private void OnMouseEnter()
         {
             Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, Transparency);
