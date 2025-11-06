@@ -39,6 +39,65 @@ public class GameBoard
         return CheckBoxes(isHorizontal, row, col, player);
     }
 
+    public IEnumerable<Edge> GetAvailableMoves()
+    {
+        for (int r = 0; r < Rows; r++)
+            for (int c = 0; c < Columns - 1; c++)
+                if (HorizontalEdges[r, c] == Player.None)
+                    yield return new Edge(EdgeType.Horizontal, r, c);
+
+        for (int r = 0; r < Rows - 1; r++)
+            for (int c = 0; c < Columns; c++)
+                if (VerticalEdges[r, c] == Player.None)
+                    yield return new Edge(EdgeType.Vertical, r, c);
+    }
+
+    public IEnumerable<(int row, int col)> GetAffectedBoxes(Edge edge)
+    {
+        if (edge.Type == EdgeType.Horizontal)
+        {
+            if (edge.Row > 0)
+                yield return (edge.Row - 1, edge.Column);
+            if (edge.Row < Rows - 1)
+                yield return (edge.Row, edge.Column);
+        }
+        else
+        {
+            if (edge.Column > 0)
+                yield return (edge.Row, edge.Column - 1);
+            if (edge.Column < Columns - 1)
+                yield return (edge.Row, edge.Column);
+        }
+    }
+
+    public bool HasEdge(int row, int col, EdgeType type, Edge? hypotheticalMove = null)
+    {
+        bool has = false;
+        if (type == EdgeType.Horizontal)
+        {
+            if (row < 0 || row >= Rows || col < 0 || col >= Columns - 1)
+                return false;
+
+            has = HorizontalEdges[row, col] != Player.None;
+        }
+        else
+        {
+            if (row < 0 || row >= Rows - 1 || col < 0 || col >= Columns)
+                return false;
+
+            has = VerticalEdges[row, col] != Player.None;
+        }
+
+        if (hypotheticalMove.HasValue)
+        {
+            var h = hypotheticalMove.Value;
+            if (h.Type == type && h.Row == row && h.Column == col)
+                has = true;
+        }
+
+        return has;
+    }
+
     private bool CheckBoxes(bool isHorizontal, int row, int col, Player player)
     {
         bool completed = false;
