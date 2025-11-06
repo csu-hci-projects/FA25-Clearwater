@@ -1854,10 +1854,6 @@ PrefabInstance:
       value: Edge (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5044949876519770121, guid: 99aa94e4da69fe243b9ddb8e50e91f37, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.24999994
-      objectReference: {fileID: 0}
-    - target: {fileID: 5044949876519770121, guid: 99aa94e4da69fe243b9ddb8e50e91f37, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.515
       objectReference: {fileID: 0}

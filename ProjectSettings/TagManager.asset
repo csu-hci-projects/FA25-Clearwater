@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - InteractionBubble
+  - DotsAndBoxes_Edge
   layers:
   - Default
   - TransparentFX

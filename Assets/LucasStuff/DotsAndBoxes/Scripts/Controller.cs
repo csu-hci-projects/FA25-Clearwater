@@ -1,32 +1,28 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
-[System.Serializable]
-public class GameObjectRow
+namespace DotsAndBoxes
 {
-    public GameObject[] elements;
-}
-
-public class Controller : MonoBehaviour
-{
-    [SerializeField] CinemachineCamera mainCam;
-    [SerializeField] Camera gameCam;
-    [SerializeField] GameObjectRow[] horizontalEdges;
-    [SerializeField] GameObjectRow[] verticalEdges;
-    private bool gaming;
-
-    void Awake()
+    public class Controller : MonoBehaviour
     {
-        mainCam.tag = "Untagged";
-        gameCam.tag = "MainCamera";
-        mainCam.enabled = false;
-        gameCam.enabled = true;
+        [SerializeField] CinemachineCamera mainCam;
+        [SerializeField] Camera gameCam;
+        private GameBoard gameBoard;
+        private bool gaming;
 
-        gaming = false;
-    }
+        void Awake()
+        {
+            mainCam.tag = "Untagged";
+            gameCam.tag = "MainCamera";
+            mainCam.enabled = false;
+            gameCam.enabled = true;
 
-    void Update()
-    {
+            gaming = false;
+        }
 
+        void Update()
+        {
+
+        }
     }
 }

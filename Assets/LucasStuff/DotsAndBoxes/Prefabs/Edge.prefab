@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4044542971797878919}
   m_Layer: 0
   m_Name: Edge
-  m_TagString: Untagged
+  m_TagString: DotsAndBoxes_Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 11.3796, y: 12.8295, z: 12.3886}
-  m_LocalScale: {x: 0.25, y: 0.7148785, z: 0.24999996}
+  m_LocalScale: {x: 0.25, y: 0.7148785, z: 0.24999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -126,4 +126,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 617d7dbe823fcd443ab9e346f682d0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EdgeRunner
-  gameCam: {fileID: 0}

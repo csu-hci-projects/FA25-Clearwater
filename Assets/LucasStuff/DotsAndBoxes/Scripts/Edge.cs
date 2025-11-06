@@ -1,13 +1,16 @@
-public struct Edge
+namespace DotsAndBoxes
 {
-    public EdgeType Type;
-    public int Row;
-    public int Column;
-
-    public Edge(EdgeType type, int row, int col)
+    public struct Edge
     {
-        Type = type;
-        Row = row;
-        Column = col;
+        public EdgeType Type;
+        public int Row;
+        public int Column;
+
+        public Edge(EdgeType type, int row, int col)
+        {
+            Type = type;
+            Row = row;
+            Column = col;
+        }
     }
 }

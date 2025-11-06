@@ -1,57 +1,60 @@
 using System;
 
-public class HeuristicAI
+namespace DotsAndBoxes
 {
-    private readonly Random random = new();
-
-    public Edge ChooseMove(GameBoard board)
+    public class HeuristicAI
     {
-        Edge? bestMove = null;
-        int bestScore = int.MinValue;
+        private readonly Random random = new();
 
-        foreach (var move in board.GetAvailableMoves())
+        public Edge ChooseMove(GameBoard board)
         {
-            int score = EvaluateMove(board, move);
-            if (score > bestScore)
+            Edge? bestMove = null;
+            int bestScore = int.MinValue;
+
+            foreach (var move in board.GetAvailableMoves())
             {
-                bestScore = score;
-                bestMove = move;
+                int score = EvaluateMove(board, move);
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestMove = move;
+                }
             }
+
+            return bestMove ?? throw new Exception("AI panicked!");
         }
 
-        return bestMove ?? throw new Exception("AI panicked!");
-    }
-
-    private int EvaluateMove(GameBoard board, Edge move)
-    {
-        int score = 0;
-
-        foreach (var (row, col) in board.GetAffectedBoxes(move))
+        private int EvaluateMove(GameBoard board, Edge move)
         {
-            score += random.Next(-3, 4);
-            switch (CountBoxEdges(board, row, col, move))
+            int score = 0;
+
+            foreach (var (row, col) in board.GetAffectedBoxes(move))
             {
-                case 1:
-                    score += 3; break;
-                case 2:
-                    score -= 10; break;
-                case 3:
-                    score += 25; break;
+                score += random.Next(-3, 4);
+                switch (CountBoxEdges(board, row, col, move))
+                {
+                    case 1:
+                        score += 3; break;
+                    case 2:
+                        score -= 10; break;
+                    case 3:
+                        score += 25; break;
+                }
             }
+
+            return score;
         }
 
-        return score;
-    }
+        private int CountBoxEdges(GameBoard board, int row, int col, Edge hypotheticalMove)
+        {
+            int count = 0;
 
-    private int CountBoxEdges(GameBoard board, int row, int col, Edge hypotheticalMove)
-    {
-        int count = 0;
+            if (board.HasEdge(row, col, EdgeType.Horizontal, hypotheticalMove)) count++;
+            if (board.HasEdge(row + 1, col, EdgeType.Horizontal, hypotheticalMove)) count++;
+            if (board.HasEdge(row, col, EdgeType.Vertical, hypotheticalMove)) count++;
+            if (board.HasEdge(row, col + 1, EdgeType.Vertical, hypotheticalMove)) count++;
 
-        if (board.HasEdge(row, col, EdgeType.Horizontal, hypotheticalMove)) count++;
-        if (board.HasEdge(row + 1, col, EdgeType.Horizontal, hypotheticalMove)) count++;
-        if (board.HasEdge(row, col, EdgeType.Vertical, hypotheticalMove)) count++;
-        if (board.HasEdge(row, col + 1, EdgeType.Vertical, hypotheticalMove)) count++;
-
-        return count;
+            return count;
+        }
     }
 }

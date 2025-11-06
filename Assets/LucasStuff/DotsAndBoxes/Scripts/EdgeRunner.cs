@@ -1,34 +1,39 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Renderer))]
-public class EdgeRunner : MonoBehaviour
+namespace DotsAndBoxes
 {
-    protected int X;
-    protected int Y;
-    private readonly float transparency = 0.5f;
-    private Material material;
-
-    void Start()
+    [RequireComponent(typeof(Renderer))]
+    public class EdgeRunner : MonoBehaviour
     {
-        material = GetComponent<Renderer>().material;
-        material.SetFloat("_Surface", 1f);
-        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        material.SetInt("_ZWrite", 0);
-        material.DisableKeyword("_ALPHATEST_ON");
-        material.EnableKeyword("_ALPHABLEND_ON");
-        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        material.renderQueue = 3000;
-        material.color = new Color(material.color.r, material.color.g, material.color.b, 0.0f);
-    }
+        public EdgeType Type;
+        public int X;
+        public int Y;
+        private Controller master;
+        private readonly float Transparency = 0.5f;
+        private Material Mat;
 
-    private void OnMouseEnter()
-    {
-        material.color = new Color(material.color.r, material.color.g, material.color.b, transparency);
-    }
+        void Start()
+        {
+            Mat = GetComponent<Renderer>().material;
+            Mat.SetFloat("_Surface", 1f);
+            Mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            Mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            Mat.SetInt("_ZWrite", 0);
+            Mat.DisableKeyword("_ALPHATEST_ON");
+            Mat.EnableKeyword("_ALPHABLEND_ON");
+            Mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            Mat.renderQueue = 3000;
+            Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0.0f);
+        }
 
-    private void OnMouseExit()
-    {
-        material.color = new Color(material.color.r, material.color.g, material.color.b, 0.0f);
+        private void OnMouseEnter()
+        {
+            Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, Transparency);
+        }
+
+        private void OnMouseExit()
+        {
+            Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0.0f);
+        }
     }
 }

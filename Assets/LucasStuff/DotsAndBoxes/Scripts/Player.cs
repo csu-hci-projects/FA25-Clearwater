@@ -1,6 +1,9 @@
-public enum Player
+namespace DotsAndBoxes
 {
-    None,
-    Human,
-    AI
+    public enum Player
+    {
+        None,
+        Human,
+        AI
+    }
 }

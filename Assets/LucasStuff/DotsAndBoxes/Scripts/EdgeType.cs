@@ -1,5 +1,8 @@
-public enum EdgeType
+namespace DotsAndBoxes
 {
-    Horizontal,
-    Vertical
+    public enum EdgeType
+    {
+        Horizontal,
+        Vertical
+    }
 }
