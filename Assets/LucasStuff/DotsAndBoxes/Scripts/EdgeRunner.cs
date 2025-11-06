@@ -5,14 +5,13 @@ namespace DotsAndBoxes
     [RequireComponent(typeof(Renderer))]
     public class EdgeRunner : MonoBehaviour
     {
-        public EdgeType Type;
-        public int X;
-        public int Y;
+        [SerializeField] EdgeType Type;
+        public Edge edge;
         private Controller master;
         private readonly float Transparency = 0.5f;
         private Material Mat;
 
-        void Start()
+        void Awake()
         {
             Mat = GetComponent<Renderer>().material;
             Mat.SetFloat("_Surface", 1f);
@@ -26,9 +25,10 @@ namespace DotsAndBoxes
             Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0.0f);
         }
 
-        public void Init(Controller controller)
+        public void Init(Controller controller, int x, int y)
         {
             master = controller;
+            edge = new(Type, x, y);
         }
 
         private void OnMouseEnter()

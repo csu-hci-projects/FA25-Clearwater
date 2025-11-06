@@ -9,33 +9,35 @@ namespace DotsAndBoxes
         [SerializeField] CinemachineCamera mainCam;
         [SerializeField] Camera gameCam;
         private GameBoard gameBoard;
-        private bool gaming;
-        private Dictionary<(EdgeType, int, int), EdgeRunner> edgeRunners = new();
+        private HeuristicAI AI;
+        private Dictionary<(EdgeType, int, int), EdgeRunner> edgeRunners;
+        // private bool gaming;
 
         void Awake()
         {
+            gameBoard = new();
+            AI = new();
+            edgeRunners = new();
+
             mainCam.tag = "Untagged";
             gameCam.tag = "MainCamera";
             mainCam.enabled = false;
             gameCam.enabled = true;
 
-            gaming = false;
+            // gaming = true;
         }
 
-        void OnEnable()
+        void Start()
         {
-            gameBoard = new();
-
             foreach (var er in FindObjectsByType<EdgeRunner>(FindObjectsSortMode.None))
             {
-                er.Init(this);
-                edgeRunners[(er.Type, er.X, er.Y)] = er;
+                string[] parts = er.name.Split('-');  // fmt: Edge-R-C
+                er.Init(this, int.Parse(parts[1]), int.Parse(parts[2]));
+                edgeRunners[(er.edge.Type, er.edge.Row, er.edge.Column)] = er;
+                Debug.Log($"({(er.edge.Type, er.edge.Row, er.edge.Column)})");
             }
-        }
 
-        void Update()
-        {
-
+            Debug.Log($"Count: {edgeRunners.Count}");
         }
     }
 }
