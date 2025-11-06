@@ -16,27 +16,36 @@ public class GameBoard
         Boxes = new Player[Rows - 1, Columns - 1];
     }
 
-    /// <summary>
-    /// Returns true if a box was completed
-    /// </summary>
-    public bool DrawLine(bool isHorizontal, int row, int col, Player player)
+    public bool ApplyMove(Edge edge, Player player)
     {
-        if (isHorizontal)
-        {
-            if (HorizontalEdges[row, col] != Player.None)
-                throw new InvalidOperationException($"Horizontal line at ({row},{col}) already set");
+        bool completed = false;
 
-            HorizontalEdges[row, col] = player;
+        if (edge.Type == EdgeType.Horizontal)
+        {
+            if (HorizontalEdges[edge.Row, edge.Column] != Player.None)
+                throw new InvalidOperationException($"Horizontal edge already exists at ({edge.Row}, {edge.Column})");
+            HorizontalEdges[edge.Row, edge.Column] = player;
         }
         else
         {
-            if (VerticalEdges[row, col] != Player.None)
-                throw new InvalidOperationException($"Vertical line at ({row},{col}) already set");
-
-            VerticalEdges[row, col] = player;
+            if (VerticalEdges[edge.Row, edge.Column] != Player.None)
+                throw new InvalidOperationException($"Vertical edge already exists at ({edge.Row}, {edge.Column})");
+            VerticalEdges[edge.Row, edge.Column] = player;
         }
 
-        return CheckBoxes(isHorizontal, row, col, player);
+        foreach (var (r, c) in GetAffectedBoxes(edge))
+        {
+            if (r >= 0 && r < Rows - 1 && c >= 0 && c < Columns - 1)
+            {
+                if (Boxes[r, c] == Player.None && IsBoxComplete(r, c))
+                {
+                    Boxes[r, c] = player;
+                    completed = true;
+                }
+            }
+        }
+
+        return completed;
     }
 
     public IEnumerable<Edge> GetAvailableMoves()
