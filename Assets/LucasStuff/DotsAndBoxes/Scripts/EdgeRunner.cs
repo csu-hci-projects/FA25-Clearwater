@@ -10,11 +10,12 @@ namespace DotsAndBoxes
         private Controller master;
         private readonly float Transparency = 0.5f;
         private Material Mat;
+        private bool isSet;
 
         void Awake()
         {
             Mat = GetComponent<Renderer>().material;
-            Mat.SetFloat("_Surface", 1f);
+            Mat.SetFloat("_Surface", 1);
             Mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
             Mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
             Mat.SetInt("_ZWrite", 0);
@@ -22,7 +23,9 @@ namespace DotsAndBoxes
             Mat.EnableKeyword("_ALPHABLEND_ON");
             Mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
             Mat.renderQueue = 3000;
-            Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0.0f);
+            Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0);
+
+            isSet = false;
         }
 
         public void Init(Controller controller, int x, int y)
@@ -33,17 +36,27 @@ namespace DotsAndBoxes
 
         private void OnMouseEnter()
         {
-            Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, Transparency);
+            if (!isSet)
+                Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, Transparency);
         }
 
         private void OnMouseDown()
         {
-            master.TryMove(edge);
+            if (!isSet)
+            {
+                bool successful = master.TryMove(edge, Player.Human);
+                if (successful)
+                {
+                    Mat.color = new Color(0, 0, 1, 1);
+                    isSet = true;
+                }
+            }
         }
 
         private void OnMouseExit()
         {
-            Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0.0f);
+            if (!isSet)
+                Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0);
         }
     }
 }

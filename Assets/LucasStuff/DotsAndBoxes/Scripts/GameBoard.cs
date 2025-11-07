@@ -84,7 +84,7 @@ namespace DotsAndBoxes
 
         public bool HasEdge(int row, int col, EdgeType type, Edge? hypotheticalMove = null)
         {
-            bool has = false;
+            bool has;
             if (type == EdgeType.Horizontal)
             {
                 if (row < 0 || row >= Rows || col < 0 || col >= Columns - 1)
