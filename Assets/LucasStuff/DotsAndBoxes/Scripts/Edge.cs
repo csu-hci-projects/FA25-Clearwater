@@ -12,5 +12,7 @@ namespace DotsAndBoxes
             Row = row;
             Column = col;
         }
+
+        public override readonly string ToString() => $"[{Type}, {Row}, {Column}]";
     }
 }

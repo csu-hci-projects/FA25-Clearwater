@@ -36,6 +36,11 @@ namespace DotsAndBoxes
             Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, Transparency);
         }
 
+        private void OnMouseDown()
+        {
+            master.TryMove(edge);
+        }
+
         private void OnMouseExit()
         {
             Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0.0f);

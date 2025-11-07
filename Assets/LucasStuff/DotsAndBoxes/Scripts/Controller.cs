@@ -34,10 +34,12 @@ namespace DotsAndBoxes
                 string[] parts = er.name.Split('-');  // fmt: Edge-R-C
                 er.Init(this, int.Parse(parts[1]), int.Parse(parts[2]));
                 edgeRunners[(er.edge.Type, er.edge.Row, er.edge.Column)] = er;
-                Debug.Log($"({(er.edge.Type, er.edge.Row, er.edge.Column)})");
             }
+        }
 
-            Debug.Log($"Count: {edgeRunners.Count}");
+        public bool TryMove(Edge edge)
+        {
+            return false;
         }
     }
 }
