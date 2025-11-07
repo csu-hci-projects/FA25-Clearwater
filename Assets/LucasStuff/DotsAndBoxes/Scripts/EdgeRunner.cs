@@ -34,6 +34,15 @@ namespace DotsAndBoxes
             edge = new(Type, x, y);
         }
 
+        public void AISet()
+        {
+            if (!isSet)
+            {
+                Mat.color = new Color(1, 0, 0, 1);
+                isSet = true;
+            }
+        }
+
         private void OnMouseEnter()
         {
             if (!isSet)

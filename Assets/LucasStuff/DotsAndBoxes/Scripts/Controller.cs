@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -6,11 +7,12 @@ namespace DotsAndBoxes
 {
     public class Controller : MonoBehaviour
     {
+        private static readonly WaitForSeconds waitForSeconds = new(0.5f);
         [SerializeField] CinemachineCamera mainCam;
         [SerializeField] Camera gameCam;
         private GameBoard gameBoard;
         private HeuristicAI AI;
-        private Dictionary<(EdgeType, int, int), EdgeRunner> edgeRunners;
+        private Dictionary<Edge, EdgeRunner> edgeRunners;
         private Player activePlayer;
         // private bool gaming;
 
@@ -34,7 +36,7 @@ namespace DotsAndBoxes
             {
                 string[] parts = er.name.Split('-');  // fmt: Edge-R-C
                 er.Init(this, int.Parse(parts[1]), int.Parse(parts[2]));
-                edgeRunners[(er.edge.Type, er.edge.Row, er.edge.Column)] = er;
+                edgeRunners[er.edge] = er;
             }
 
             activePlayer = Player.Human;
@@ -42,6 +44,8 @@ namespace DotsAndBoxes
 
         public bool TryMove(Edge edge, Player player)
         {
+            StartCoroutine(AITurn());
+
             if (!gameBoard.HasEdge(edge.Row, edge.Column, edge.Type) && player == activePlayer)
             {
                 bool boxCompleted = gameBoard.ApplyMove(edge, player);
@@ -54,6 +58,19 @@ namespace DotsAndBoxes
             }
 
             return false;
+        }
+
+        private IEnumerator AITurn()
+        {
+            yield return waitForSeconds;
+
+            Edge move = AI.ChooseMove(gameBoard);
+            bool successful = TryMove(move, Player.AI);
+            Debug.Log(successful);
+            if (successful)
+            {
+                edgeRunners[move].AISet();
+            }
         }
     }
 }
