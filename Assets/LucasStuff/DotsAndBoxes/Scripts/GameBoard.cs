@@ -14,8 +14,8 @@ namespace DotsAndBoxes
 
         public GameBoard()
         {
-            HorizontalEdges = new Player[Rows, Columns - 1];
-            VerticalEdges = new Player[Rows - 1, Columns];
+            HorizontalEdges = new Player[Rows, Columns];
+            VerticalEdges = new Player[Rows, Columns];
             Boxes = new Player[Rows - 1, Columns - 1];
         }
 

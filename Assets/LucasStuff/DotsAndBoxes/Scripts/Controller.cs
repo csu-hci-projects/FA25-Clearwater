@@ -66,7 +66,6 @@ namespace DotsAndBoxes
 
             Edge move = AI.ChooseMove(gameBoard);
             bool successful = TryMove(move, Player.AI);
-            Debug.Log(successful);
             if (successful)
             {
                 edgeRunners[move].AISet();

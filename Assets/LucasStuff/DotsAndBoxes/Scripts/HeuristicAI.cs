@@ -34,11 +34,11 @@ namespace DotsAndBoxes
                 switch (CountBoxEdges(board, row, col, move))
                 {
                     case 1:
-                        score += 3; break;
+                        score += 5; break;
                     case 2:
                         score -= 10; break;
                     case 3:
-                        score += 25; break;
+                        score += 40; break;
                 }
             }
 
