@@ -72,6 +72,9 @@ namespace DotsAndBoxes
             if (gameOver || gameBoard.IsGameOver())
             {
                 activePlayer = Player.None;
+
+                int humanScore, AIScore;
+                (humanScore, AIScore) = gameBoard.GetScores();
             }
 
             return successful;

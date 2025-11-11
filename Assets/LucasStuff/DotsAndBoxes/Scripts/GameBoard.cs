@@ -118,6 +118,19 @@ namespace DotsAndBoxes
             return GetAvailableMoves().Count() == 0;
         }
 
+        /// <returns>(int, int): (humanScore, AIScore)</returns>
+        public (int, int) GetScores()
+        {
+            int humanScore = 0;
+            int AIScore = 0;
+
+            for (int i = 0; i < Rows - 1; ++i)
+                for (int j = 0; j < Columns - 1; ++j)
+                    _ = Boxes[i, j] == Player.Human ? humanScore++ : AIScore++;
+
+            return (humanScore, AIScore);
+        }
+
         private bool IsBoxComplete(int row, int col)
         {
             return HorizontalEdges[row, col] != Player.None
