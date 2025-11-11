@@ -39,7 +39,7 @@ namespace DotsAndBoxes
         {
             if (!isSet)
             {
-                Mat.color = new Color(1, 0, 0, 1);
+                Mat.color = new Color(0.941f, 0.196f, 0.141f, 1);
                 isSet = true;
             }
             else
@@ -61,7 +61,7 @@ namespace DotsAndBoxes
                 bool successful = master.TryMove(edge, Player.Human);
                 if (successful)
                 {
-                    Mat.color = new Color(0, 0, 1, 1);
+                    Mat.color = new Color(0.263f, 0.459f, 1f, 1);
                     isSet = true;
                 }
             }

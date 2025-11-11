@@ -6,6 +6,7 @@ namespace DotsAndBoxes
     public class BoxRunner : MonoBehaviour
     {
         private Material Mat;
+        private static readonly float Transparency = 0.8f;
 
         void Awake()
         {
@@ -23,7 +24,7 @@ namespace DotsAndBoxes
 
         public void Set(Player player)
         {
-            Mat.color = player == Player.Human ? new Color(0, 0, 1, 1) : new Color(1, 0, 0, 1);
+            Mat.color = player == Player.Human ? new Color(0.263f, 0.459f, 1f, Transparency) : new Color(0.941f, 0.196f, 0.141f, Transparency);
         }
     }
 }
