@@ -59,7 +59,6 @@ namespace DotsAndBoxes
                 if (!boxCompleted)
                 {
                     activePlayer = activePlayer == Player.Human ? Player.AI : Player.Human;
-
                 }
 
                 if (activePlayer == Player.AI)
