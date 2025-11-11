@@ -11,9 +11,11 @@ namespace DotsAndBoxes
         private readonly Player[,] HorizontalEdges;
         private readonly Player[,] VerticalEdges;
         private readonly Player[,] Boxes;
+        private Dictionary<(int, int), BoxRunner> boxRunners;
 
-        public GameBoard()
+        public GameBoard(Dictionary<(int, int), BoxRunner> boxRunners)
         {
+            this.boxRunners = boxRunners;
             HorizontalEdges = new Player[Rows, Columns - 1];
             VerticalEdges = new Player[Rows - 1, Columns];
             Boxes = new Player[Rows - 1, Columns - 1];
@@ -43,6 +45,7 @@ namespace DotsAndBoxes
                     if (Boxes[r, c] == Player.None && IsBoxComplete(r, c))
                     {
                         Boxes[r, c] = player;
+                        boxRunners[(r, c)].Set(player);
                         completed = true;
                     }
                 }

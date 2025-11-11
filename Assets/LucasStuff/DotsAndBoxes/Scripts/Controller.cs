@@ -19,10 +19,10 @@ namespace DotsAndBoxes
 
         void Awake()
         {
-            gameBoard = new();
+            boxRunners = new();
+            gameBoard = new(boxRunners);
             AI = new();
             edgeRunners = new();
-            boxRunners = new();
 
             mainCam.tag = "Untagged";
             gameCam.tag = "MainCamera";
@@ -44,7 +44,6 @@ namespace DotsAndBoxes
             foreach (var box in FindObjectsByType<BoxRunner>(FindObjectsSortMode.None))
             {
                 string[] parts = box.name.Split('-');  // fmt: Edge-C-R
-                box.Init(this);
                 boxRunners[(int.Parse(parts[2]), int.Parse(parts[1]))] = box;
             }
 

@@ -5,7 +5,6 @@ namespace DotsAndBoxes
     [RequireComponent(typeof(Renderer))]
     public class BoxRunner : MonoBehaviour
     {
-        private Controller master;
         private Material Mat;
 
         void Awake()
@@ -22,14 +21,9 @@ namespace DotsAndBoxes
             Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0);
         }
 
-        public void Init(Controller controller)
-        {
-            master = controller;
-        }
-
         public void Set(Player player)
         {
-            Mat.color = player == Player.Human ? new Color(0, 0, 1, 1) : new Color(0, 0, 1, 1);
+            Mat.color = player == Player.Human ? new Color(0, 0, 1, 1) : new Color(1, 0, 0, 1);
         }
     }
 }
