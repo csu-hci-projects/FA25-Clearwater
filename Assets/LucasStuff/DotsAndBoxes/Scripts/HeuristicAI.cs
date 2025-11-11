@@ -30,15 +30,17 @@ namespace DotsAndBoxes
 
             foreach (var (row, col) in board.GetAffectedBoxes(move))
             {
-                score += random.Next(-3, 4);
+                score += random.Next(-5, 6);
                 switch (CountBoxEdges(board, row, col, move))
                 {
                     case 1:
                         score += 5; break;
                     case 2:
-                        score -= 10; break;
+                        score += 5; break;
                     case 3:
-                        score += 40; break;
+                        score -= 20; break;
+                    case 4:
+                        score += 30; break;
                 }
             }
 
