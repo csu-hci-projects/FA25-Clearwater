@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace DotsAndBoxes
@@ -40,6 +41,10 @@ namespace DotsAndBoxes
             {
                 Mat.color = new Color(1, 0, 0, 1);
                 isSet = true;
+            }
+            else
+            {
+                throw new Exception("AI tried to set an already-set edge!");
             }
         }
 

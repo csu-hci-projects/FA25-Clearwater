@@ -21,7 +21,7 @@ namespace DotsAndBoxes
                 }
             }
 
-            return bestMove ?? throw new Exception("AI panicked!");
+            return bestMove ?? throw new Exception("AI couldn't find a move!");
         }
 
         private int EvaluateMove(GameBoard board, Edge move)
