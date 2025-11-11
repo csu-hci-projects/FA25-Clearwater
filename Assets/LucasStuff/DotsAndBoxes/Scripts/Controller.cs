@@ -22,6 +22,7 @@ namespace DotsAndBoxes
             gameBoard = new();
             AI = new();
             edgeRunners = new();
+            boxRunners = new();
 
             mainCam.tag = "Untagged";
             gameCam.tag = "MainCamera";
