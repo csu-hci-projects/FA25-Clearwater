@@ -52,7 +52,7 @@ namespace DotsAndBoxes
 
         public bool TryMove(Edge edge, Player player)
         {
-            bool successful = false;
+            bool successful = false, gameOver = false;
             if (!gameBoard.HasEdge(edge.Row, edge.Column, edge.Type) && player == activePlayer)
             {
                 bool boxCompleted = gameBoard.ApplyMove(edge, player);
@@ -61,10 +61,17 @@ namespace DotsAndBoxes
                     activePlayer = activePlayer == Player.Human ? Player.AI : Player.Human;
                 }
 
-                if (activePlayer == Player.AI)
+                gameOver = gameBoard.IsGameOver();
+
+                if (!gameOver && activePlayer == Player.AI)
                     StartCoroutine(AITurn());
 
                 successful = true;
+            }
+
+            if (gameOver || gameBoard.IsGameOver())
+            {
+                activePlayer = Player.None;
             }
 
             return successful;

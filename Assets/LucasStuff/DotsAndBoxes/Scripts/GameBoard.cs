@@ -11,7 +11,7 @@ namespace DotsAndBoxes
         private readonly Player[,] HorizontalEdges;
         private readonly Player[,] VerticalEdges;
         private readonly Player[,] Boxes;
-        private Dictionary<(int, int), BoxRunner> boxRunners;
+        private readonly Dictionary<(int, int), BoxRunner> boxRunners;
 
         public GameBoard(Dictionary<(int, int), BoxRunner> boxRunners)
         {
