@@ -34,8 +34,8 @@ namespace DotsAndBoxes
         {
             foreach (var er in FindObjectsByType<EdgeRunner>(FindObjectsSortMode.None))
             {
-                string[] parts = er.name.Split('-');  // fmt: Edge-R-C
-                er.Init(this, int.Parse(parts[1]), int.Parse(parts[2]));
+                string[] parts = er.name.Split('-');  // fmt: Edge-C-R
+                er.Init(this, int.Parse(parts[2]), int.Parse(parts[1]));
                 edgeRunners[er.edge] = er;
             }
 
@@ -44,15 +44,17 @@ namespace DotsAndBoxes
 
         public bool TryMove(Edge edge, Player player)
         {
-            StartCoroutine(AITurn());
-
             if (!gameBoard.HasEdge(edge.Row, edge.Column, edge.Type) && player == activePlayer)
             {
                 bool boxCompleted = gameBoard.ApplyMove(edge, player);
                 if (!boxCompleted)
                 {
                     activePlayer = activePlayer == Player.Human ? Player.AI : Player.Human;
+
                 }
+
+                if (activePlayer == Player.AI)
+                    StartCoroutine(AITurn());
 
                 return true;
             }
