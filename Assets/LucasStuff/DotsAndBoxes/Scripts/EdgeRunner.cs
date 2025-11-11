@@ -9,7 +9,7 @@ namespace DotsAndBoxes
         [SerializeField] EdgeType Type;
         public Edge edge;
         private Controller master;
-        private readonly float Transparency = 0.5f;
+        private static readonly float Transparency = 0.5f;
         private Material Mat;
         private bool isSet;
 

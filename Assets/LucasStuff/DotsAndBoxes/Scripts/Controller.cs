@@ -13,6 +13,7 @@ namespace DotsAndBoxes
         private GameBoard gameBoard;
         private HeuristicAI AI;
         private Dictionary<Edge, EdgeRunner> edgeRunners;
+        private Dictionary<(int, int), BoxRunner> boxRunners;
         private Player activePlayer;
         // private bool gaming;
 
@@ -37,6 +38,13 @@ namespace DotsAndBoxes
                 string[] parts = er.name.Split('-');  // fmt: Edge-C-R
                 er.Init(this, int.Parse(parts[2]), int.Parse(parts[1]));
                 edgeRunners[er.edge] = er;
+            }
+
+            foreach (var box in FindObjectsByType<BoxRunner>(FindObjectsSortMode.None))
+            {
+                string[] parts = box.name.Split('-');  // fmt: Edge-C-R
+                box.Init(this);
+                boxRunners[(int.Parse(parts[2]), int.Parse(parts[1]))] = box;
             }
 
             activePlayer = Player.Human;
