@@ -15,7 +15,7 @@ namespace DotsAndBoxes
         private Dictionary<Edge, EdgeRunner> edgeRunners;
         private Dictionary<(int, int), BoxRunner> boxRunners;
         private Player activePlayer;
-        // private bool gaming;
+        private bool gaming;
 
         void Awake()
         {
@@ -24,12 +24,12 @@ namespace DotsAndBoxes
             AI = new();
             edgeRunners = new();
 
-            mainCam.tag = "Untagged";
-            gameCam.tag = "MainCamera";
-            mainCam.enabled = false;
-            gameCam.enabled = true;
+            mainCam.tag = "MainCamera";
+            gameCam.tag = "Untagged";
+            mainCam.enabled = true;
+            gameCam.enabled = false;
 
-            // gaming = true;
+            gaming = false;
         }
 
         void Start()
@@ -53,28 +53,31 @@ namespace DotsAndBoxes
         public bool TryMove(Edge edge, Player player)
         {
             bool successful = false, gameOver = false;
-            if (!gameBoard.HasEdge(edge.Row, edge.Column, edge.Type) && player == activePlayer)
+            if (gaming)
             {
-                bool boxCompleted = gameBoard.ApplyMove(edge, player);
-                if (!boxCompleted)
+                if (!gameBoard.HasEdge(edge.Row, edge.Column, edge.Type) && player == activePlayer)
                 {
-                    activePlayer = activePlayer == Player.Human ? Player.AI : Player.Human;
+                    bool boxCompleted = gameBoard.ApplyMove(edge, player);
+                    if (!boxCompleted)
+                    {
+                        activePlayer = activePlayer == Player.Human ? Player.AI : Player.Human;
+                    }
+
+                    gameOver = gameBoard.IsGameOver();
+
+                    if (!gameOver && activePlayer == Player.AI)
+                        StartCoroutine(AITurn());
+
+                    successful = true;
                 }
 
-                gameOver = gameBoard.IsGameOver();
+                if (gameOver || gameBoard.IsGameOver())
+                {
+                    activePlayer = Player.None;
 
-                if (!gameOver && activePlayer == Player.AI)
-                    StartCoroutine(AITurn());
-
-                successful = true;
-            }
-
-            if (gameOver || gameBoard.IsGameOver())
-            {
-                activePlayer = Player.None;
-
-                int humanScore, AIScore;
-                (humanScore, AIScore) = gameBoard.GetScores();
+                    int humanScore, AIScore;
+                    (humanScore, AIScore) = gameBoard.GetScores();
+                }
             }
 
             return successful;
