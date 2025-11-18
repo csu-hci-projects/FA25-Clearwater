@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace DotsAndBoxes
 {
@@ -24,6 +25,7 @@ namespace DotsAndBoxes
             AI = new();
             edgeRunners = new();
 
+            // InputSystem.EnableDevice(Keyboard.current);
             mainCam.tag = "MainCamera";
             gameCam.tag = "Untagged";
             mainCam.enabled = true;
