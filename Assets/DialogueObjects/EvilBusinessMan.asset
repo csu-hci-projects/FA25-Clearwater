@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbed7784f1a341c28b39c80c4eacb89, type: 3}
+  m_Name: EvilBusinessMan
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueObject
+  dialogue:
+  - Scram Kid! Can't you see I'm dumping waste here!
+  - How else am I supposed to mass produce these vapes?
+  - Ahhhhhhhh my two favorite things, building my fortune and eviscerating the environment.
+  - Look around at all this peaceful nature... really makes me sick! I must inquire
+    about building a stripmall here. Yes - that's what I'll do!
