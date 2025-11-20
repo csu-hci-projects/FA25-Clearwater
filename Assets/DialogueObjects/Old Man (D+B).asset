@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306056b5c49b6488c91ec00ee567277f, type: 3}
+  m_Name: Old Man (D+B)
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueObject
+  dialogue:
+  - 'What? Yeah, that oily boat over there is mine. How''d you know? '
+  - 'You want me to clean it up? Sounds like a lot of work... '
+  - 'Hey kid. You look like you''d be a decent Dots and Boxes player. I can tell. '
+  - 'How''s about you try and beat me, the world''s GREATEST Dots and Boxes player? '
+  - 'I''ll clean up that there boat if you win. Not like that''ll happen... '
+  - 'Let''s start. '
