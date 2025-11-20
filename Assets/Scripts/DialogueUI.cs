@@ -41,13 +41,33 @@ public class DialogueUI : MonoBehaviour
     {
         foreach(string dialogue in dialogueObject.Dialogue)
         {
-            yield return textPrinter.Run(dialogue, textLabel);
+
+            yield return RunTypingEffect(dialogue);
+
+            textLabel.text = dialogue;
+
+            yield return null;
+
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.F));
         }
 
         CloseDialogueBox();
     }
 
+    private IEnumerator RunTypingEffect(string dialogue)
+    {
+        textPrinter.Run(dialogue, textLabel);
+
+        while(textPrinter.IsRunning)
+        {
+            yield return null;
+
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                textPrinter.Stop();
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player")) {
