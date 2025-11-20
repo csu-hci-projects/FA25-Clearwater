@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7959343286118810795}
   - component: {fileID: 3647317597944269065}
   - component: {fileID: 5058524269484346611}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PipeI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,6 +77,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7959343286118810795}
     m_Modifications:
+    - target: {fileID: -8700617353114198275, guid: 42a43ddbaefc5ce4fbf317234574fc68, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 42a43ddbaefc5ce4fbf317234574fc68, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -117,9 +121,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 42a43ddbaefc5ce4fbf317234574fc68, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 65702495048144492, guid: 42a43ddbaefc5ce4fbf317234574fc68, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 42a43ddbaefc5ce4fbf317234574fc68, type: 3}
       propertyPath: m_Name
       value: PipeI
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 42a43ddbaefc5ce4fbf317234574fc68, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

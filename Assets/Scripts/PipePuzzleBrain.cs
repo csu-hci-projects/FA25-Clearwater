@@ -15,7 +15,7 @@ public class PipePuzzleBrain : MonoBehaviour, IsToggleable, PuzzleBrain
     [SerializeField] GameObject pipeI;
     [SerializeField] GameObject pipeT;
     [SerializeField] Array2DPipes insepctorPipesGrid;
-    [SerializeField] int pipeSize;
+    [SerializeField] float pipeSize;
 
     private (Pipes type, Rotation rotation)[,] dataGrid;
     private GameObject[,] pipesGrid;
@@ -46,6 +46,7 @@ public class PipePuzzleBrain : MonoBehaviour, IsToggleable, PuzzleBrain
                         break;
                 }
                 pipesGrid[i, j].transform.Rotate(0, 90f * (int)dataGrid[i, j].rotation, 0);
+                pipesGrid[i, j].transform.localScale = new Vector3(pipeSize/2, pipeSize/2, pipeSize/2);
                 BePipe currentPipe = pipesGrid[i, j].GetComponent<BePipe>();
                 currentPipe.SetGridPosition(i, j);
             }
