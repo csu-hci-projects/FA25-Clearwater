@@ -6,102 +6,76 @@ using TMPro;
 
 public class TextPrinter : MonoBehaviour
 {
+    [SerializeField] private float typewriterSpeed = 25f;
 
-    [SerializeField][Range(0,0.5f)] float normalTextSpeed;
-    [SerializeField][Range(0,0.5f)] float skipTextSpeed;
+    private readonly Dictionary<HashSet<char>, float> punctuations = new Dictionary<HashSet<char>, float>()
+    {
+        {new HashSet<char>() {'.', '!', '?'}, 0.4f},
+        {new HashSet<char>() {',', ';', ':'}, 0.2f},
+    };
 
-    float currentTextSpeed;
+    public bool IsRunning { get; private set; }
 
-    private TMP_Text textMesh;
     private Coroutine typingCoroutine;
 
-    void Awake()
+    public void Run(string textToType, TMP_Text textLabel)
     {
-        textMesh = GetComponent<TMP_Text>();
+        typingCoroutine = StartCoroutine(TypeText(textToType, textLabel));
     }
 
-    /*public void PrintText(string line) {
-        if(typingCoroutine != null) {
-            StopCoroutine(typingCoroutine);
-        }
-
-        typingCoroutine = StartCoroutine(TypeTextCO(line));
-    }*/
-
-    public void Print(List<string> sentences, Action onFinishedPrinting)
+    public void Stop()
     {
-        if(typingCoroutine != null)
-        {
-            StopCoroutine(typingCoroutine);
-        }
-
-        typingCoroutine = StartCoroutine(PrintDialogue(sentences, onFinishedPrinting));
+        StopCoroutine(typingCoroutine);
+        IsRunning = false;
     }
 
-    IEnumerator PrintDialogue(List<string> sentences, Action onFinishedPrinting)
+    private IEnumerator TypeText(string textToType, TMP_Text textLabel)
     {
-        foreach(var sentence in sentences)
-        {
-            textMesh.text = string.Empty;
-            yield return new WaitForSeconds(0.1f);
-
-            foreach(var letter in sentence)
-            {
-                HandleTextSpeed();
-                textMesh.text += letter;
-                if(letter == ' ') continue;
-                yield return new WaitForSecondsRealtime(currentTextSpeed);
-            }
-            yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E));
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
-        }
-        textMesh.text = string.Empty;
-        onFinishedPrinting?.Invoke();
-    }
-
-    /*void RepositionSentence(string sentence)
-    {
-        textMesh.text = sentence;
-        textMesh.ForceMeshUpdate();
-        var firstChar = textMesh.textInfo.lineInfo[0].firstVisibleCharacterIndex;
-        var lastChar = textMesh.textInfo.lineInfo[0].lastVisisbleCharacterIndex;
-        var firstCharPos = textMesh.textInfo.characterInfo[firstChar].topLeft;
-        var lastCharPos = textMesh.textInfo.characterInfo[lastChar].topRight;
-        textMesh.rectTransfrom.anchoredPosition = new Vector2(0 - ((firstCharPos.x + lastCharPos.x) / 2), textMesh.reactTransform.anchoredPosition);
-        textMesh.text = string.Empty;
-    }*/
-
-    void HandleTextSpeed()
-    {
-        if(Input.GetKey(KeyCode.E))
-        {
-
-            currentTextSpeed = skipTextSpeed;
-        }
-        else{
-            currentTextSpeed = normalTextSpeed;
-        }
-    }
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
-    private IEnumerator TypeTextCO(string textToType)
-    {
-        textMesh.text = string.Empty;
-
-        for(int i = 0; i < textToType.Length; i++)
-        {
-            textMesh.text += textToType[i];
-            yield return new WaitForSeconds(0.025f);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        IsRunning = true;
+        textLabel.text = string.Empty;
         
+        float t = 0;
+        int charIndex = 0;
+
+        while(charIndex < textToType.Length)
+        {
+            int lastCharIndex = charIndex;
+
+            t += Time.deltaTime * typewriterSpeed;
+
+            charIndex = Mathf.FloorToInt(t);
+            charIndex = Mathf.Clamp(charIndex, 0, textToType.Length);
+
+            for(int i = lastCharIndex; i < charIndex; i++)
+            {
+                bool isLast = i > textToType.Length - 1;
+
+                textLabel.text = textToType.Substring(0, i + 1);
+
+                if(IsPunctuation(textToType[i], out float waitTime) && !isLast && !IsPunctuation(textToType[i + 1], out _))
+                {
+                    yield return new WaitForSeconds(waitTime);
+                }
+            }
+
+            yield return null;
+        }
+        
+        IsRunning = false;
+    }
+
+    private bool IsPunctuation(char character, out float waitTime)
+    {
+        foreach (KeyValuePair<HashSet<char>, float> punctuationCategory in punctuations)
+        {
+            if(punctuationCategory.Key.Contains(character))
+            {
+                waitTime = punctuationCategory.Value;
+                return true;
+            }
+        }
+
+        waitTime = default;
+        return false;
     }
 }
