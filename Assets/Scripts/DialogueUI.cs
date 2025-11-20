@@ -10,11 +10,14 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private DialogueObject testDialogue;
 
     private TextPrinter textPrinter;
-    private bool playerDetection = false;
-    private bool dialogueRunning = false;
+    public bool PlayerDetection { get; private set; }
+    public bool DialogueRunning { get; private set; }
 
     private void Start()
     {
+        PlayerDetection = false;
+        DialogueRunning = false;
+
         textPrinter = GetComponent<TextPrinter>();
         CloseDialogueBox();
     }
@@ -22,7 +25,7 @@ public class DialogueUI : MonoBehaviour
 
     private void Update()
     {
-        if (playerDetection && !dialogueRunning && Input.GetKeyDown(KeyCode.F))
+        if (PlayerDetection && !DialogueRunning && Input.GetKeyDown(KeyCode.F))
         {
             ShowDialogue(testDialogue);
         }
@@ -31,7 +34,7 @@ public class DialogueUI : MonoBehaviour
 
     public void ShowDialogue(DialogueObject dialogueObject)
     {
-        dialogueRunning = true;
+        DialogueRunning = true;
         dialogueBox.SetActive(true);
         StartCoroutine(StepThroughDialogue(dialogueObject));
     }
@@ -71,21 +74,21 @@ public class DialogueUI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player")) {
-            playerDetection = true;
+            PlayerDetection = true;
         }
     }
 
 
     private void OnTriggerExit(Collider other) {
         if(other.CompareTag("Player")) {
-            playerDetection = false;
+            PlayerDetection = false;
         }
     }
 
 
     private void CloseDialogueBox()
     {
-        dialogueRunning = false;
+        DialogueRunning = false;
         dialogueBox.SetActive(false);
         textLabel.text = string.Empty;
     }
