@@ -10,9 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 306056b5c49b6488c91ec00ee567277f, type: 3}
-  m_Name: Grandpa
+  m_Name: EvilBusinessMan
   m_EditorClassIdentifier: Assembly-CSharp::DialogueObject
-  dialogue:
-  - Hey kiddo! Lotta bodies in the lake again. Gett'n to be that time o' year I guess.
-  - Say, that reminds me of when they found your gam gam in there.
-  - Anywho... them bodies ain't gon' fish themselves out. Better get a move on.
+  dialogue: []
