@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4777235247711587934}
   - component: {fileID: 1918025492710944049}
   - component: {fileID: -6495924901587171328}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PipeL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +101,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8137675458320459282}
     m_Modifications:
+    - target: {fileID: -8700617353114198275, guid: afb8775a9dea07543834739b12027073, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: afb8775a9dea07543834739b12027073, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -141,9 +145,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: afb8775a9dea07543834739b12027073, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 65702495048144492, guid: afb8775a9dea07543834739b12027073, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: afb8775a9dea07543834739b12027073, type: 3}
       propertyPath: m_Name
       value: PipeL
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: afb8775a9dea07543834739b12027073, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

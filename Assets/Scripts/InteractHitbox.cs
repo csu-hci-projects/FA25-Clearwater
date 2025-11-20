@@ -9,6 +9,8 @@ public class InteractHitbox : MonoBehaviour
     bool hitDetect;
     RaycastHit hit;
     IsHittable hittable;
+    public LayerMask mask;
+    public Animator playerAnimator;
     void Start()
     {
         
@@ -19,14 +21,15 @@ public class InteractHitbox : MonoBehaviour
     {
         if (mouse.leftButton.wasPressedThisFrame)
         {
-            hitDetect = Physics.BoxCast(transform.position, transform.localScale * 0.5f, transform.forward, out hit, transform.rotation, 1f);
+            playerAnimator.SetBool("Interact", true);
+            hitDetect = Physics.Raycast(transform.position, transform.forward, out hit, 2.5f, mask);
             if (hitDetect)
             {
                 hittable = hit.collider.gameObject.GetComponent<IsHittable>();
                 if (hittable != null)
                 {
                     hittable.OnHit();
-                    Debug.DrawLine(transform.position, hit.collider.gameObject.transform.position, Color.red, 0.5f);
+                    //Debug.DrawLine(transform.position, hit.collider.gameObject.transform.position, Color.red, 0.5f);
                 }
             }
         }
