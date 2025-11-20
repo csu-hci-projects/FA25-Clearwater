@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NPCSystem : MonoBehaviour
 {
-    bool playerDetection = false;
+    /*bool playerDetection = false;
     public TextPrinter textPrinter;
     List<string> gpaDialogue = new List<string>();
 
@@ -20,7 +20,7 @@ public class NPCSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         if(playerDetection && Input.GetKeyDown(KeyCode.F)) {
             gpaDialogue.Add(line1);
@@ -45,4 +45,4 @@ public class NPCSystem : MonoBehaviour
     private void OnDialogueFinished() {
         print("Grandpa finished talking!");
     }
-}
+}*/
