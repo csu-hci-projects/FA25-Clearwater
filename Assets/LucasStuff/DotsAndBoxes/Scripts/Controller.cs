@@ -11,12 +11,15 @@ namespace DotsAndBoxes
         private static readonly WaitForSeconds waitForSeconds = new(0.5f);
         [SerializeField] CinemachineCamera mainCam;
         [SerializeField] Camera gameCam;
+        [SerializeField] GameObject playerDetect;
         private GameBoard gameBoard;
         private HeuristicAI AI;
         private Dictionary<Edge, EdgeRunner> edgeRunners;
         private Dictionary<(int, int), BoxRunner> boxRunners;
         private Player activePlayer;
         private bool gaming;
+        private DialogueUI dialogueUI;
+        private bool textIsPrinting;
 
         void Awake()
         {
@@ -25,13 +28,16 @@ namespace DotsAndBoxes
             AI = new();
             edgeRunners = new();
 
-            // InputSystem.EnableDevice(Keyboard.current);
+            dialogueUI = playerDetect.GetComponent<DialogueUI>();
+
+            InputSystem.EnableDevice(Keyboard.current);
             mainCam.tag = "MainCamera";
             gameCam.tag = "Untagged";
             mainCam.enabled = true;
             gameCam.enabled = false;
 
             gaming = false;
+            textIsPrinting = false;
         }
 
         void Start()
@@ -50,6 +56,27 @@ namespace DotsAndBoxes
             }
 
             activePlayer = Player.Human;
+        }
+
+        void Update()
+        {
+            if (!gaming)
+            {
+                if (dialogueUI.PlayerDetection && dialogueUI.DialogueRunning)
+                {
+                    textIsPrinting = true;
+                } else if (dialogueUI.PlayerDetection && !dialogueUI.DialogueRunning && textIsPrinting)
+                {
+                    textIsPrinting = false;
+
+                    mainCam.tag = "Untagged";
+                    gameCam.tag = "MainCamera";
+                    mainCam.enabled = false;
+                    gameCam.enabled = true;
+
+                    gaming = true;
+                }
+            }
         }
 
         public bool TryMove(Edge edge, Player player)
@@ -79,6 +106,13 @@ namespace DotsAndBoxes
 
                     int humanScore, AIScore;
                     (humanScore, AIScore) = gameBoard.GetScores();
+
+                    mainCam.tag = "MainCamera";
+                    gameCam.tag = "Untagged";
+                    mainCam.enabled = true;
+                    gameCam.enabled = false;
+
+                    gaming = false;
                 }
             }
 
