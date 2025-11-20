@@ -69,6 +69,9 @@ namespace DotsAndBoxes
                 {
                     textIsPrinting = false;
 
+                    InputSystem.DisableDevice(Keyboard.current);
+                    Cursor.lockState = CursorLockMode.None;
+
                     mainCam.tag = "Untagged";
                     gameCam.tag = "MainCamera";
                     mainCam.enabled = false;
@@ -106,6 +109,9 @@ namespace DotsAndBoxes
 
                     int humanScore, AIScore;
                     (humanScore, AIScore) = gameBoard.GetScores();
+
+                    InputSystem.EnableDevice(Keyboard.current);
+                    Cursor.lockState = CursorLockMode.Locked;
 
                     mainCam.tag = "MainCamera";
                     gameCam.tag = "Untagged";
