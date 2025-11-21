@@ -5845,6 +5845,7 @@ MonoBehaviour:
   mainCam: {fileID: 1132393080}
   gameCam: {fileID: 190776345}
   playerDetect: {fileID: 2076090795}
+  dialogue: {fileID: 11400000, guid: 686b889bc0b96c141a72b6dcd292a21d, type: 2}
 --- !u!224 &1617228850 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8935443855184957921, guid: d1e02a0d40b6f42bea04760b6cefe090, type: 3}
