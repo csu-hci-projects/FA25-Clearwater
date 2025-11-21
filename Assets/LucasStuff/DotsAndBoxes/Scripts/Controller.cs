@@ -52,7 +52,7 @@ namespace DotsAndBoxes
 
         void Update()
         {
-            if (!gaming)
+            if (!gaming && winnerWasAI)
             {
                 if (dialogueUI.PlayerDetection && dialogueUI.DialogueRunning)
                 {
