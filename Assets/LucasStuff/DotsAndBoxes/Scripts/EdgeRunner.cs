@@ -12,6 +12,7 @@ namespace DotsAndBoxes
         private static readonly float Transparency = 0.5f;
         private Material Mat;
         private bool isSet;
+        private Color originalColor;
 
         void Awake()
         {
@@ -25,6 +26,7 @@ namespace DotsAndBoxes
             Mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
             Mat.renderQueue = 3000;
             Mat.color = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0);
+            originalColor = new Color(Mat.color.r, Mat.color.g, Mat.color.b, 0);
 
             isSet = false;
         }
@@ -45,6 +47,15 @@ namespace DotsAndBoxes
             else
             {
                 throw new Exception("AI tried to set an already-set edge!");
+            }
+        }
+
+        public void Unset()
+        {
+            if (isSet)
+            {
+                Mat.color = originalColor;
+                isSet = false;
             }
         }
 

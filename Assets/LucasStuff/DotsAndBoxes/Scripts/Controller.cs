@@ -20,6 +20,7 @@ namespace DotsAndBoxes
         private bool gaming;
         private DialogueUI dialogueUI;
         private bool textIsPrinting;
+        private bool winnerWasAI = true;
 
         void Awake()
         {
@@ -47,8 +48,6 @@ namespace DotsAndBoxes
                 string[] parts = box.name.Split('-');  // fmt: Edge-C-R
                 boxRunners[(int.Parse(parts[2]), int.Parse(parts[1]))] = box;
             }
-
-            activePlayer = Player.Human;
         }
 
         void Update()
@@ -95,6 +94,8 @@ namespace DotsAndBoxes
                     int humanScore, AIScore;
                     (humanScore, AIScore) = gameBoard.GetScores();
 
+                    if (humanScore > AIScore) winnerWasAI = false;
+
                     NotGaming();
                 }
             }
@@ -111,6 +112,17 @@ namespace DotsAndBoxes
             gameCam.tag = "MainCamera";
             mainCam.enabled = false;
             gameCam.enabled = true;
+
+            if (winnerWasAI)
+            {
+                foreach (EdgeRunner er in edgeRunners.Values) er.Unset();
+
+                foreach (BoxRunner br in boxRunners.Values) br.Unset();
+
+                gameBoard.Reset();
+            }
+
+            activePlayer = Player.Human;
 
             gaming = true;
         }
