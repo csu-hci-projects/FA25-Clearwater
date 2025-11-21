@@ -12,7 +12,8 @@ namespace DotsAndBoxes
         [SerializeField] CinemachineCamera mainCam;
         [SerializeField] Camera gameCam;
         [SerializeField] GameObject playerDetect;
-        [SerializeField] DialogueObject dialogue;
+        [SerializeField] DialogueObject dialogueAIWinner;
+        [SerializeField] DialogueObject dialogueHumanWinner;
         private GameBoard gameBoard;
         private HeuristicAI AI;
         private Dictionary<Edge, EdgeRunner> edgeRunners;
@@ -95,15 +96,15 @@ namespace DotsAndBoxes
                     int humanScore, AIScore;
                     (humanScore, AIScore) = gameBoard.GetScores();
 
-                    if (humanScore > AIScore) winnerWasAI = false;
+                    if (humanScore > AIScore) 
+                    {
+                        winnerWasAI = false;
+
+                        dialogueUI.SetDialogueObject(dialogueHumanWinner);
+                    }
                     else
                     {
-                        string[] newDialogue = new string[]
-                        {
-                            "What, couldn't handle failure? ",
-                            "Fine, I'll give you another shot. " 
-                        };
-                        dialogue.ClearAndFill(newDialogue);
+                        dialogueUI.SetDialogueObject(dialogueAIWinner);
                     }
 
                     NotGaming();

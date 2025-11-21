@@ -31,6 +31,7 @@ public class DialogueUI : MonoBehaviour
         }
     }
 
+    public void SetDialogueObject(DialogueObject dialogueObject) => testDialogue = dialogueObject;
 
     public void ShowDialogue(DialogueObject dialogueObject)
     {
