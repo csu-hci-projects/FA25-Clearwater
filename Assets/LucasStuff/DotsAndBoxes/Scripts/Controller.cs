@@ -30,14 +30,7 @@ namespace DotsAndBoxes
 
             dialogueUI = playerDetect.GetComponent<DialogueUI>();
 
-            InputSystem.EnableDevice(Keyboard.current);
-            mainCam.tag = "MainCamera";
-            gameCam.tag = "Untagged";
-            mainCam.enabled = true;
-            gameCam.enabled = false;
-
-            gaming = false;
-            textIsPrinting = false;
+            NotGaming();
         }
 
         void Start()
@@ -69,15 +62,7 @@ namespace DotsAndBoxes
                 {
                     textIsPrinting = false;
 
-                    InputSystem.DisableDevice(Keyboard.current);
-                    Cursor.lockState = CursorLockMode.None;
-
-                    mainCam.tag = "Untagged";
-                    gameCam.tag = "MainCamera";
-                    mainCam.enabled = false;
-                    gameCam.enabled = true;
-
-                    gaming = true;
+                    StartGaming();
                 }
             }
         }
@@ -110,19 +95,37 @@ namespace DotsAndBoxes
                     int humanScore, AIScore;
                     (humanScore, AIScore) = gameBoard.GetScores();
 
-                    InputSystem.EnableDevice(Keyboard.current);
-                    Cursor.lockState = CursorLockMode.Locked;
-
-                    mainCam.tag = "MainCamera";
-                    gameCam.tag = "Untagged";
-                    mainCam.enabled = true;
-                    gameCam.enabled = false;
-
-                    gaming = false;
+                    NotGaming();
                 }
             }
 
             return successful;
+        }
+
+        private void StartGaming()
+        {
+            InputSystem.DisableDevice(Keyboard.current);
+            Cursor.lockState = CursorLockMode.None;
+
+            mainCam.tag = "Untagged";
+            gameCam.tag = "MainCamera";
+            mainCam.enabled = false;
+            gameCam.enabled = true;
+
+            gaming = true;
+        }
+
+        private void NotGaming()
+        {
+            InputSystem.EnableDevice(Keyboard.current);
+            Cursor.lockState = CursorLockMode.Locked;
+
+            mainCam.tag = "MainCamera";
+            gameCam.tag = "Untagged";
+            mainCam.enabled = true;
+            gameCam.enabled = false;
+
+            gaming = false;
         }
 
         private IEnumerator AITurn()
