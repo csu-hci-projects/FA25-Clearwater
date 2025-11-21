@@ -131,6 +131,21 @@ namespace DotsAndBoxes
             return (humanScore, AIScore);
         }
 
+        public void Reset()
+        {
+            for (int r = 0; r < Rows; r++)
+                for (int c = 0; c < Columns - 1; c++)
+                    HorizontalEdges[r, c] = Player.None;
+
+            for (int r = 0; r < Rows - 1; r++)
+                for (int c = 0; c < Columns; c++)
+                    VerticalEdges[r, c] = Player.None;
+
+            for (int r = 0; r < Rows - 1; r++)
+                for (int c = 0; c < Columns - 1; c++)
+                    Boxes[r, c] = Player.None;
+        }
+
         private bool IsBoxComplete(int row, int col)
         {
             return HorizontalEdges[row, col] != Player.None

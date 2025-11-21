@@ -12,6 +12,8 @@ namespace DotsAndBoxes
         [SerializeField] CinemachineCamera mainCam;
         [SerializeField] Camera gameCam;
         [SerializeField] GameObject playerDetect;
+        [SerializeField] DialogueObject dialogueAIWinner;
+        [SerializeField] DialogueObject dialogueHumanWinner;
         private GameBoard gameBoard;
         private HeuristicAI AI;
         private Dictionary<Edge, EdgeRunner> edgeRunners;
@@ -20,6 +22,7 @@ namespace DotsAndBoxes
         private bool gaming;
         private DialogueUI dialogueUI;
         private bool textIsPrinting;
+        private bool winnerWasAI = true;
 
         void Awake()
         {
@@ -30,14 +33,7 @@ namespace DotsAndBoxes
 
             dialogueUI = playerDetect.GetComponent<DialogueUI>();
 
-            InputSystem.EnableDevice(Keyboard.current);
-            mainCam.tag = "MainCamera";
-            gameCam.tag = "Untagged";
-            mainCam.enabled = true;
-            gameCam.enabled = false;
-
-            gaming = false;
-            textIsPrinting = false;
+            NotGaming();
         }
 
         void Start()
@@ -54,13 +50,11 @@ namespace DotsAndBoxes
                 string[] parts = box.name.Split('-');  // fmt: Edge-C-R
                 boxRunners[(int.Parse(parts[2]), int.Parse(parts[1]))] = box;
             }
-
-            activePlayer = Player.Human;
         }
 
         void Update()
         {
-            if (!gaming)
+            if (!gaming && winnerWasAI)
             {
                 if (dialogueUI.PlayerDetection && dialogueUI.DialogueRunning)
                 {
@@ -69,15 +63,7 @@ namespace DotsAndBoxes
                 {
                     textIsPrinting = false;
 
-                    InputSystem.DisableDevice(Keyboard.current);
-                    Cursor.lockState = CursorLockMode.None;
-
-                    mainCam.tag = "Untagged";
-                    gameCam.tag = "MainCamera";
-                    mainCam.enabled = false;
-                    gameCam.enabled = true;
-
-                    gaming = true;
+                    StartGaming();
                 }
             }
         }
@@ -110,19 +96,59 @@ namespace DotsAndBoxes
                     int humanScore, AIScore;
                     (humanScore, AIScore) = gameBoard.GetScores();
 
-                    InputSystem.EnableDevice(Keyboard.current);
-                    Cursor.lockState = CursorLockMode.Locked;
+                    if (humanScore > AIScore) 
+                    {
+                        winnerWasAI = false;
 
-                    mainCam.tag = "MainCamera";
-                    gameCam.tag = "Untagged";
-                    mainCam.enabled = true;
-                    gameCam.enabled = false;
+                        dialogueUI.SetDialogueObject(dialogueHumanWinner);
+                    }
+                    else
+                    {
+                        dialogueUI.SetDialogueObject(dialogueAIWinner);
+                    }
 
-                    gaming = false;
+                    NotGaming();
                 }
             }
 
             return successful;
+        }
+
+        private void StartGaming()
+        {
+            InputSystem.DisableDevice(Keyboard.current);
+            Cursor.lockState = CursorLockMode.None;
+
+            mainCam.tag = "Untagged";
+            gameCam.tag = "MainCamera";
+            mainCam.enabled = false;
+            gameCam.enabled = true;
+
+            if (winnerWasAI)
+            {
+                foreach (EdgeRunner er in edgeRunners.Values) er.Unset();
+
+                foreach (BoxRunner br in boxRunners.Values) br.Unset();
+
+                gameBoard.Reset();
+            }
+
+            activePlayer = Player.Human;
+
+            gaming = true;
+        }
+
+        private void NotGaming()
+        {
+            InputSystem.EnableDevice(Keyboard.current);
+            Cursor.lockState = CursorLockMode.Locked;
+
+            mainCam.tag = "MainCamera";
+            gameCam.tag = "Untagged";
+            mainCam.enabled = true;
+            gameCam.enabled = false;
+
+            gaming = false;
         }
 
         private IEnumerator AITurn()
