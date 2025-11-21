@@ -10,7 +10,7 @@ public class TextPrinter : MonoBehaviour
 
     private readonly Dictionary<HashSet<char>, float> punctuations = new Dictionary<HashSet<char>, float>()
     {
-        {new HashSet<char>() {'.', '!', '?'}, 0.4f},
+        {new HashSet<char>() {'.', '!', '?'}, 0.3f},
         {new HashSet<char>() {',', ';', ':'}, 0.2f},
     };
 
