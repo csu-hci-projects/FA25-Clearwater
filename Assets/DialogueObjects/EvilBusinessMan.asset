@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306056b5c49b6488c91ec00ee567277f, type: 3}
   m_Name: EvilBusinessMan
   m_EditorClassIdentifier: Assembly-CSharp::DialogueObject
-  dialogue: []
+  dialogue:
+  - ' Scram Kid! Can''t you see I''m dumping waste here!'
+  - How else am I supposed to mass produce these vapes?
+  - Ahhhhhhhh my two favorite things, building my fortune and eviscerating the environment.
+  - Look around at all this peaceful nature... really makes me sick! I must inquire
+    about building a stripmall here. Yes - that's what I'll do!
