@@ -269,8 +269,6 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: aa80235d4671e4a4bb84e4c00dbd706b, type: 3}
     instantiationMode: 0
-  - dependency: {fileID: 7217548427170228418, guid: 5dcc6bac198124386bf5585e0f4e7425, type: 3}
-    instantiationMode: 0
   - dependency: {fileID: 100000, guid: bad1f1798203c544f98a3797aaaef533, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2100000, guid: abc266de8c01de040bfa48da3f006d12, type: 2}
@@ -308,6 +306,10 @@ MonoBehaviour:
   - dependency: {fileID: 919132149155446097, guid: 7966d979d9982a743a30e3b75a402b94, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 9063150391390206945, guid: 76ac2c4e2124c6847bd2e2bded3417e9, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 11400000, guid: ed35121820299234a958410d3388f2c2, type: 2}
+    instantiationMode: 1
+  - dependency: {fileID: 9151023407244439402, guid: 5b69696bd9ec7d643926ebf9f6a685d6, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 6453309886974881835, guid: 8651053af2be0084e8b6858af168bd94, type: 3}
     instantiationMode: 0
@@ -503,6 +505,8 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 919132149155446097, guid: ddd36401006c8654eae1d9a6bcd6380d, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+    instantiationMode: 1
   - dependency: {fileID: 2800000, guid: cffb506ec5b6cc94498def65473d32ed, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2100000, guid: a9fa93e6f0cfb2d4cb4f07ef5c20a752, type: 2}
@@ -623,6 +627,8 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2100000, guid: f18bfe87a4079f34e8fb9a2e598a8bba, type: 2}
     instantiationMode: 0
+  - dependency: {fileID: 12800000, guid: 4beb055f07aaff244873dec698d0363e, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 7400000, guid: ec1035cfa7371dc449ef3c58cefaffd0, type: 2}
     instantiationMode: 0
   - dependency: {fileID: 100000, guid: 4fc77b36bb950804481dd3a761c6d468, type: 3}
