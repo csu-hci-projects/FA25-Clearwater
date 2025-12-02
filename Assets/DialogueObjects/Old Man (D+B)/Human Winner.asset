@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueObject
   dialogue:
   - 'Drat! That wasn''t supposed to happen... '
-  - 'I suppose that boat''ll have to be cleaned up now. '
+  - 'One professional to another: you did good, kid. '
+  - 'I cleaned up that boat for ya. '
