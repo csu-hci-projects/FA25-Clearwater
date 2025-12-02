@@ -14,6 +14,7 @@ namespace DotsAndBoxes
         [SerializeField] GameObject playerDetect;
         [SerializeField] DialogueObject dialogueAIWinner;
         [SerializeField] DialogueObject dialogueHumanWinner;
+        [SerializeField] GameObject oil;
         private GameBoard gameBoard;
         private HeuristicAI AI;
         private Dictionary<Edge, EdgeRunner> edgeRunners;
@@ -99,6 +100,8 @@ namespace DotsAndBoxes
                     if (humanScore > AIScore) 
                     {
                         winnerWasAI = false;
+
+                        oil.SetActive(false);
 
                         dialogueUI.SetDialogueObject(dialogueHumanWinner);
                     }
