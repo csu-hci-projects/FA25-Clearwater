@@ -9,6 +9,8 @@ public class GameMaster : MonoBehaviour
     private HashSet<PuzzleBrain> puzzleBrains;
     private bool allDone = false;
 
+    public static bool playerHasWrench = false;
+
     void Start()
     {
         puzzleBrains = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<PuzzleBrain>().ToHashSet();
@@ -31,5 +33,10 @@ public class GameMaster : MonoBehaviour
             }
             if (doneIfTrue) allDone = true;
         }
+    }
+
+    public void PlayerObtainWrench()
+    {
+        playerHasWrench = true;
     }
 }

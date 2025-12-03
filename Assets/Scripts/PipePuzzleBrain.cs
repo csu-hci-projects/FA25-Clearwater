@@ -61,20 +61,16 @@ public class PipePuzzleBrain : MonoBehaviour, IsToggleable, PuzzleBrain
     // Update is called once per frame
     void Update()
     {
-        Keyboard keyboard = Keyboard.current;
-        if (keyboard.tKey.IsPressed())
-        {
-            finished = CheckCompletion();
-            if (finished) Debug.Log("The Puzzle is Solved!");
-            else Debug.Log("The Puzzle is Not Solved!");
-        }
 
     }
 
     public void RotatePipe(int row, int column)
     {
-        dataGrid[row, column].rotation = (Rotation)(((int)dataGrid[row, column].rotation + 1) % 4);
-        pipesGrid[row, column].transform.Rotate(0, 90f, 0);
+        if (GameMaster.playerHasWrench)
+        {
+            dataGrid[row, column].rotation = (Rotation)(((int)dataGrid[row, column].rotation + 1) % 4);
+            pipesGrid[row, column].transform.Rotate(0, 90f, 0);
+        }
     }
 
     public bool CheckCompletion()
