@@ -8,6 +8,7 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
     [SerializeField] private TMP_Text textLabel;
     [SerializeField] private DialogueObject testDialogue;
+    [SerializeField] private GameObject ChattingHint;
 
     private TextPrinter textPrinter;
     public bool PlayerDetection { get; private set; }
@@ -38,6 +39,7 @@ public class DialogueUI : MonoBehaviour
         DialogueRunning = true;
         dialogueBox.SetActive(true);
         StartCoroutine(StepThroughDialogue(dialogueObject));
+        ChattingHint.SetActive(false);
     }
 
 
@@ -76,6 +78,7 @@ public class DialogueUI : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player")) {
             PlayerDetection = true;
+            ChattingHint.SetActive(true);
         }
     }
 
@@ -83,6 +86,7 @@ public class DialogueUI : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         if(other.CompareTag("Player")) {
             PlayerDetection = false;
+            ChattingHint.SetActive(false);
         }
     }
 

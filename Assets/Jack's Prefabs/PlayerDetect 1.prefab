@@ -128,6 +128,7 @@ MonoBehaviour:
   dialogueBox: {fileID: 0}
   textLabel: {fileID: 0}
   testDialogue: {fileID: 11400000, guid: a4f11cd674f59445f80a8cc45fb03577, type: 2}
+  ChattingHint: {fileID: 7707994470287452730, guid: 1e4e8a37f7864ee489f529747191030b, type: 3}
 --- !u!114 &325310532702321
 MonoBehaviour:
   m_ObjectHideFlags: 0

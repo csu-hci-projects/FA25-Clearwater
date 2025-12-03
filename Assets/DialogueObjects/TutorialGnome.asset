@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306056b5c49b6488c91ec00ee567277f, type: 3}
+  m_Name: TutorialGnome
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueObject
+  dialogue:
+  - Psst! Down Here! I'm Guido, the Tutorial Gnome!
+  - I'm just here to give you a little Tutorial Gnome welcome here in Clearwater!
+  - As you've alrerady seen, pressing 'F' will let you talk to people!
+  - The 'WASD' keys will let you walk around, and you can look at your surroudnings
+    by moving your mouse. And you can click the left mouse button to interact with
+    some objects and puzzles!
+  - I'd do the rest of my 4 hour long welcome speech, but I'm not in the mood since
+    the lake is all dirty and full of nasty rotton creatures.
+  - If only someone would go solve all the puzzles to save the lake! Maybe they'd
+    start by talking to the people around these cabins...
+  - Anyway toodeloo! Have fun or something.
