@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace DotsAndBoxes
 {
-    public class Controller : MonoBehaviour
+    public class Controller : MonoBehaviour, PuzzleBrain
     {
         private static readonly WaitForSeconds waitForSeconds = new(0.5f);
         [SerializeField] CinemachineCamera mainCam;
@@ -24,6 +24,8 @@ namespace DotsAndBoxes
         private DialogueUI dialogueUI;
         private bool textIsPrinting;
         private bool winnerWasAI = true;
+
+        public bool CheckCompletion() => !winnerWasAI;
 
         void Awake()
         {
