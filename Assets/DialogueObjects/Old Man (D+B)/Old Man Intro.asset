@@ -18,4 +18,8 @@ MonoBehaviour:
   - 'Hey kid. You look like you''d be a decent Dots and Boxes player. I can tell. '
   - 'How''s about you try and beat me, the world''s GREATEST Dots and Boxes player? '
   - 'I''ll clean up that there boat if you win. Not like that''ll happen... '
-  - 'Let''s start. '
+  - All you gotta do is select edges between the dots on the board. When you complete
+    a square of them, you claim that whole box for yourself! Then you get an extra
+    turn.
+  - Whoever claims the most boxes wins. And that whoever is gonna be me, ya hear!
+    Lets begin.
