@@ -6,6 +6,7 @@ TagManager:
   tags:
   - InteractionBubble
   - DotsAndBoxes_Edge
+  - Fish
   layers:
   - Default
   - TransparentFX
