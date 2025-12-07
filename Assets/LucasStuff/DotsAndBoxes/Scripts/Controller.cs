@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace DotsAndBoxes
 {
+    [RequireComponent(typeof(AudioSource))]
     public class Controller : MonoBehaviour, PuzzleBrain
     {
         private static readonly WaitForSeconds waitForSeconds = new(0.5f);
@@ -21,6 +22,7 @@ namespace DotsAndBoxes
         private Dictionary<(int, int), BoxRunner> boxRunners;
         private Player activePlayer;
         private bool gaming;
+        private AudioSource audioSource;
         private DialogueUI dialogueUI;
         private bool textIsPrinting;
         private bool winnerWasAI = true;
@@ -34,6 +36,7 @@ namespace DotsAndBoxes
             AI = new();
             edgeRunners = new();
 
+            audioSource = GetComponent<AudioSource>();
             dialogueUI = playerDetect.GetComponent<DialogueUI>();
 
             NotGaming();
@@ -89,6 +92,8 @@ namespace DotsAndBoxes
                     if (!gameOver && activePlayer == Player.AI)
                         StartCoroutine(AITurn());
 
+                    audioSource.pitch = Random.Range(0.9f, 1.1f);
+                    audioSource.Play();
                     successful = true;
                 }
 
