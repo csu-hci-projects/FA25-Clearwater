@@ -11,27 +11,36 @@ public class GameMaster : MonoBehaviour
 
     public static bool playerHasWrench = false;
 
+    [SerializeField] private GameObject celebrate;
+
     void Start()
     {
-        puzzleBrains = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<PuzzleBrain>().ToHashSet();
+        celebrate.SetActive(false);
+
+        puzzleBrains = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
+            .OfType<PuzzleBrain>()
+            .ToHashSet();
 
         StartCoroutine(CheckBrainsLoop());
     }
 
     private IEnumerator CheckBrainsLoop()
     {
-        while (true)
+        while (!allDone)
         {
             yield return waitFor2point5Seconds;
-
-            if (allDone) break;  // and do something interesting probably
 
             bool doneIfTrue = true;
             foreach (PuzzleBrain brain in puzzleBrains)
             {
                 if (!brain.CheckCompletion()) doneIfTrue = false;
             }
-            if (doneIfTrue) allDone = true;
+
+            if (doneIfTrue)
+            {
+                allDone = true;
+                celebrate.SetActive(true);
+            }
         }
     }
 
