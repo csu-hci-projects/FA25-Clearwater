@@ -8210,8 +8210,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080972014}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11260103, y: 1.0230478e-15, z: -1.1593355e-16, w: 0.9936403}
-  m_LocalPosition: {x: -5.310238, y: 15.49, z: -0.9705343}
+  m_LocalRotation: {x: 0.58338135, y: -0.000000088042526, z: -0.000000063238694, w: -0.8121984}
+  m_LocalPosition: {x: -5.310238, y: -15.842245, z: -0.9705343}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8405,19 +8405,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8398876545921216415, guid: 46280f872a66c4f499c15b5e1bae3779, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9936403
+      value: -0.8121983
       objectReference: {fileID: 0}
     - target: {fileID: 8398876545921216415, guid: 46280f872a66c4f499c15b5e1bae3779, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.11260103
+      value: 0.5833815
       objectReference: {fileID: 0}
     - target: {fileID: 8398876545921216415, guid: 46280f872a66c4f499c15b5e1bae3779, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1.0379265e-15
+      value: -0.000000051127262
       objectReference: {fileID: 0}
     - target: {fileID: 8398876545921216415, guid: 46280f872a66c4f499c15b5e1bae3779, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -2.472294e-16
+      value: -0.000000036723417
       objectReference: {fileID: 0}
     - target: {fileID: 8398876545921216415, guid: 46280f872a66c4f499c15b5e1bae3779, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10173,7 +10173,7 @@ Transform:
   m_GameObject: {fileID: 1472540904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.5, y: 13.12193, z: 8.36}
+  m_LocalPosition: {x: -7.2, y: 13.12193, z: 8.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10221,7 +10221,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 4.33933
+  MinDistance: 40.57126
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -10345,8 +10345,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 57.067963
+  m_Center: {x: 4.114525, y: 0, z: 0}
 --- !u!114 &1472540910
 MonoBehaviour:
   m_ObjectHideFlags: 0
