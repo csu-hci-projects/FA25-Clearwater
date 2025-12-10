@@ -26,10 +26,10 @@ public class BowController : MonoBehaviour
             StartDraw();
 
         if (Input.GetMouseButtonUp(1) && isDrawing)
-            CancelDraw();
-
-        if (Input.GetKeyDown(KeyCode.E) && isDrawing)
+        {
             ReleaseArrow();
+            CancelDraw();
+        }
     }
 
     private void StartDraw()

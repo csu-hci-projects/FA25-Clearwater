@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 96603421172769666, guid: 3891145df79233045b7504b8c60da1a5, type: 3}
       propertyPath: m_Name
-      value: fish_1_v5 Variant
+      value: fish_1_v5
       objectReference: {fileID: 0}
     - target: {fileID: 96603421172769666, guid: 3891145df79233045b7504b8c60da1a5, type: 3}
       propertyPath: m_TagString
@@ -103,6 +103,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 96603421172769666, guid: 3891145df79233045b7504b8c60da1a5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4862060321828373786}
+    - targetCorrespondingSourceObject: {fileID: 96603421172769666, guid: 3891145df79233045b7504b8c60da1a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8531634861343795991}
   m_SourcePrefab: {fileID: 100100000, guid: 3891145df79233045b7504b8c60da1a5, type: 3}
 --- !u!1 &6647872387917965945 stripped
 GameObject:
@@ -124,7 +127,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -132,3 +135,30 @@ CapsuleCollider:
   m_Height: 5.199226
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0.5}
+--- !u!54 &8531634861343795991
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6647872387917965945}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 80
+  m_CollisionDetection: 1

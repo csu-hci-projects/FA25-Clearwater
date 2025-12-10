@@ -7,7 +7,7 @@ public class NativeFishManager : MonoBehaviour
     public GameObject fishPrefab;
     public int maxFish = 100;
     public float spawnInterval = 1f;
-    public BoxCollider lakeBounds;   // Your invisible lake volume
+    public BoxCollider lakeBounds;
 
     private List<GameObject> fishList = new List<GameObject>();
 

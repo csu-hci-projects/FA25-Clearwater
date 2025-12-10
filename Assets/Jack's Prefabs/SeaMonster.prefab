@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 6890117140855523969}
   - component: {fileID: 3862053410552146549}
   - component: {fileID: 3410708236842764066}
+  - component: {fileID: 8970272978327639764}
   m_Layer: 0
   m_Name: SeaMonster
   m_TagString: Untagged
@@ -292,10 +293,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 80
+  m_CollisionDetection: 1
 --- !u!114 &3862053410552146549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,16 +304,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347004708140216774}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9524b0146f18c49a8bc9f459ee762ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NativeFishController
-  swimSpeed: 3
-  turnSpeed: 2
-  directionChangeInterval: 2
+  swimSpeed: 6
+  turnSpeed: 3
+  directionChangeInterval: 3
   minY: 4
-  maxY: 9
+  maxY: 8
 --- !u!114 &3410708236842764066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +327,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeaMonsterHealth
   health: 1
+--- !u!114 &8970272978327639764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347004708140216774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b039db102bca54e01ae0f45dca4316ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EvasiveFishController
+  swimSpeed: 6
+  turnSpeed: 3
+  directionChangeInterval: 2
+  minY: 4
+  maxY: 8
+  detectionRadius: 25
+  preyTag: Fish
+  eatEffect: {fileID: 0}
+  slowDuration: 1.5
+  slowMultiplier: 0.4
 --- !u!1 &1382263602653764711
 GameObject:
   m_ObjectHideFlags: 0
