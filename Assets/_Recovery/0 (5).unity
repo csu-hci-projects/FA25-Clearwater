@@ -3971,6 +3971,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medium Adjustable Wrench
       objectReference: {fileID: 0}
+    - target: {fileID: 933164854302871080, guid: b17c96a92bc1a814793b2a4f2789374a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1725925450858213373, guid: b17c96a92bc1a814793b2a4f2789374a, type: 3}
       propertyPath: m_Enabled
       value: 1
