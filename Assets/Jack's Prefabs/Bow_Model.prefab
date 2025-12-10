@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowController
   arrowItemName: Arrow
-  arrowPrefab: {fileID: 0}
+  arrowPrefab: {fileID: 7981642195151890832, guid: ece01584788484ecdb898ecc6f908521, type: 3}
   spawnPosition: {fileID: 1567436232448452068}
   shootingForce: 100
 --- !u!1 &1804144534207405175

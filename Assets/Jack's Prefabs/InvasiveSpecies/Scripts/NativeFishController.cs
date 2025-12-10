@@ -1,34 +1,46 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class NativeFishController : MonoBehaviour
 {
     public float swimSpeed = 3f;
     public float turnSpeed = 2f;
     public float directionChangeInterval = 2f;
 
-    
-    public float minY = 2f;   
-    public float maxY = 8f;   
+    public float minY = 2f;
+    public float maxY = 8f;
+
+    [Header("Death")]
+    public string invasiveTag = "Invasive";
 
     private Vector3 targetDirection;
+    private Rigidbody rb;
+    private bool isDead;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+
+        rb.useGravity = false;
+        rb.isKinematic = false;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
         PickNewDirection();
         InvokeRepeating(nameof(PickNewDirection), 0f, directionChangeInterval);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            Quaternion.LookRotation(targetDirection),
-            Time.deltaTime * turnSpeed
-        );
+        if (isDead) return;
 
-        transform.position += transform.forward * swimSpeed * Time.deltaTime;
+        Quaternion targetRot = Quaternion.LookRotation(targetDirection);
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, Time.fixedDeltaTime * turnSpeed));
 
-        ClampY();   
+        rb.linearVelocity = transform.forward * swimSpeed;
+
+        ClampY();
     }
 
     void PickNewDirection()
@@ -40,25 +52,40 @@ public class NativeFishController : MonoBehaviour
         ).normalized;
     }
 
-    
     void ClampY()
     {
-        Vector3 pos = transform.position;
+        Vector3 pos = rb.position;
 
         if (pos.y < minY)
         {
             pos.y = minY;
-            targetDirection.y = Mathf.Abs(targetDirection.y); 
+            targetDirection.y = Mathf.Abs(targetDirection.y);
         }
 
         if (pos.y > maxY)
         {
             pos.y = maxY;
-            targetDirection.y = -Mathf.Abs(targetDirection.y); 
+            targetDirection.y = -Mathf.Abs(targetDirection.y);
         }
 
-        transform.position = pos;
+        rb.position = pos;
         targetDirection = targetDirection.normalized;
     }
-}
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (isDead) return;
+
+        if (other.CompareTag(invasiveTag))
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        isDead = true;
+        rb.linearVelocity = Vector3.zero;
+        Destroy(gameObject);
+    }
+}

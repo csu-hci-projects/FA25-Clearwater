@@ -1,5 +1,7 @@
 using UnityEngine;
+using System.Collections;
 
+[RequireComponent(typeof(Rigidbody))]
 public class EvasiveFishController : MonoBehaviour
 {
     [Header("Movement")]
@@ -24,30 +26,41 @@ public class EvasiveFishController : MonoBehaviour
     private Transform currentTarget;
     private float baseSpeed;
     private bool isSlowed;
+    private Rigidbody rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+
+        // Rigidbody setup (same as normal fish)
+        rb.useGravity = false;
+        rb.isKinematic = false;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
         baseSpeed = swimSpeed;
+
         PickNewDirection();
         InvokeRepeating(nameof(PickNewDirection), 0f, directionChangeInterval);
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
+        FindNearestFish();
+
+        // If there's a target, chase it
         if (currentTarget != null)
         {
-            targetDirection = (currentTarget.position - transform.position).normalized;
+            targetDirection = (currentTarget.position - rb.position).normalized;
         }
 
-        
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            Quaternion.LookRotation(targetDirection),
-            Time.deltaTime * turnSpeed
-        );
+        // Smooth rotation
+        Quaternion targetRot = Quaternion.LookRotation(targetDirection);
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, Time.fixedDeltaTime * turnSpeed));
 
-        transform.position += transform.forward * swimSpeed * Time.deltaTime;
+        // Forward motion
+        rb.linearVelocity = transform.forward * swimSpeed;
 
         ClampY();
     }
@@ -65,7 +78,7 @@ public class EvasiveFishController : MonoBehaviour
 
     void ClampY()
     {
-        Vector3 pos = transform.position;
+        Vector3 pos = rb.position;
 
         if (pos.y < minY)
         {
@@ -79,7 +92,7 @@ public class EvasiveFishController : MonoBehaviour
             targetDirection.y = -Mathf.Abs(targetDirection.y);
         }
 
-        transform.position = pos;
+        rb.position = pos;
         targetDirection = targetDirection.normalized;
     }
 
@@ -98,20 +111,13 @@ public class EvasiveFishController : MonoBehaviour
         }
     }
 
-    System.Collections.IEnumerator SlowAfterEating()
+    IEnumerator SlowAfterEating()
     {
         isSlowed = true;
         swimSpeed = baseSpeed * slowMultiplier;
-
         yield return new WaitForSeconds(slowDuration);
-
         swimSpeed = baseSpeed;
         isSlowed = false;
-    }
-
-    void FixedUpdate()
-    {
-        FindNearestFish();
     }
 
     void FindNearestFish()
@@ -123,7 +129,7 @@ public class EvasiveFishController : MonoBehaviour
 
         foreach (GameObject f in fish)
         {
-            float dist = Vector3.Distance(transform.position, f.transform.position);
+            float dist = Vector3.Distance(rb.position, f.transform.position);
             if (dist < closestDist)
             {
                 closestDist = dist;
